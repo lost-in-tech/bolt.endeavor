@@ -87,6 +87,8 @@ public readonly struct MaySucceed<T>
 
     public static MaySucceed<T> Ok(T value) => new(value);
 
+    public static implicit operator T?(MaySucceed<T> value) => value.Value;
+    
     public static implicit operator MaySucceed<T>(T value) => new(value);
 
     public static implicit operator MaySucceed<T>(Failure failure) => new(failure);

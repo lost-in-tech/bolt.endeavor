@@ -9,6 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA058193
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Tests", "src\Bolt.MaySucceed.Tests\Bolt.MaySucceed.Tests.csproj", "{BDFB18BF-5441-4D93-B295-17743F7E3D89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Bus", "Bolt.MaySucceed.Extensions.Bus\Bolt.MaySucceed.Extensions.Bus.csproj", "{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Composers", "Bolt.MaySucceed.Extensions.Composers\Bolt.MaySucceed.Extensions.Composers.csproj", "{389B7814-E71A-4851-9050-E59C287B508F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Bus.FluentValidation", "Bolt.MaySucceed.Extensions.Bus.FluentValidation\Bolt.MaySucceed.Extensions.Bus.FluentValidation.csproj", "{4099386A-12AE-4730-83F5-3C603AE2F05F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +32,18 @@ Global
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{389B7814-E71A-4851-9050-E59C287B508F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{389B7814-E71A-4851-9050-E59C287B508F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{389B7814-E71A-4851-9050-E59C287B508F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{389B7814-E71A-4851-9050-E59C287B508F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4099386A-12AE-4730-83F5-3C603AE2F05F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4099386A-12AE-4730-83F5-3C603AE2F05F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4099386A-12AE-4730-83F5-3C603AE2F05F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4099386A-12AE-4730-83F5-3C603AE2F05F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89} = {BA058193-22CB-47A4-8023-ED4369A917AC}
