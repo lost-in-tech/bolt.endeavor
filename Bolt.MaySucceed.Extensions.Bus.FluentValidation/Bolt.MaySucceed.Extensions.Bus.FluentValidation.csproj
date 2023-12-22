@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Version>0.0.1-beta01</Version>
+        <Nullable>enable</Nullable>
+        <Authors>Mohammad Ruhul Amin</Authors>
+        <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
+        <PackageTags>MaySucceed,RequestBus,CQS,CQRS</PackageTags>
+        <PackageId>Bolt.MaySucceed.Extensions.Bus.FluentValidation</PackageId>
+        <Description>FluentValidation integration with Request bus validation system</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Bolt.MaySucceed.Extensions.Bus\Bolt.MaySucceed.Extensions.Bus.csproj" />
+    </ItemGroup>
+
+</Project>
