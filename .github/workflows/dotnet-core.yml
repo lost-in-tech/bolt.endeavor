@@ -25,6 +25,6 @@ jobs:
       - name: Test
         run: dotnet test ./Bolt.MaySucceed.sln --no-restore --verbosity normal
       - name: Pack
-        run: dotnet pack ./src/Bolt.MaySucceed/Bolt.MaySucceed.csproj -c Release --no-build --output ../nupkgs
+        run: dotnet pack ./Bolt.MaySucceed.sln -c Release --no-build --output ../nupkgs
       - name: Publish
         run: dotnet nuget push ../nupkgs/**.nupkg -s https://www.nuget.org/api/v2/package/ -k ${{ secrets.nugetkey }} --skip-duplicate
