@@ -20,12 +20,13 @@ public static class HttpFailure
     public static Failure BadRequest(string reason, Error error) => BadRequest(reason, new[]{error});
     public static Failure BadRequest(Error error) => BadRequest(new[]{error});
 
+    private const string MetaDataRedirectUrlKey = "RedirectUrl";
     public static Failure Redirect(string redirectUrl, bool isPermanent, string? reason = null) 
         => new(isPermanent ? 301 : 302, reason ?? "Redirect requested")
         {
             MetaData = new Dictionary<string, object>
             {
-                ["RedirectUrl"] = redirectUrl
+                [MetaDataRedirectUrlKey] = redirectUrl
             }
         };
 
@@ -39,7 +40,7 @@ public static class HttpFailure
         
         if (failure.MetaData == null) return false;
 
-        if (failure.MetaData.TryGetValue("RedirectUrl", out var url))
+        if (failure.MetaData.TryGetValue(MetaDataRedirectUrlKey, out var url))
         {
             redirectUrl = url.ToString();
             return true;
