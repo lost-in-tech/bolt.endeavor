@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Version>0.0.1-beta01</Version>
+        <Version>0.0.1-beta02</Version>
         <Nullable>enable</Nullable>
         <Authors>Mohammad Ruhul Amin</Authors>
         <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>

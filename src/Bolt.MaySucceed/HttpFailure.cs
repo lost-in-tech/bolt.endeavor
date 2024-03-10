@@ -19,4 +19,32 @@ public static class HttpFailure
     public static Failure BadRequest(params Error[] errors) => BadRequest("Please check error(s)", errors);
     public static Failure BadRequest(string reason, Error error) => BadRequest(reason, new[]{error});
     public static Failure BadRequest(Error error) => BadRequest(new[]{error});
+
+    public static Failure Redirect(string redirectUrl, bool isPermanent, string? reason = null) 
+        => new(isPermanent ? 301 : 302, reason ?? "Redirect requested")
+        {
+            MetaData = new Dictionary<string, object>
+            {
+                ["RedirectUrl"] = redirectUrl
+            }
+        };
+
+    public static bool IsNotFound(Failure failure) => failure.StatusCode == 404;
+
+    public static bool IsRedirect(Failure failure) => failure.StatusCode == 301 || failure.StatusCode == 302;
+
+    public static bool TryGetRedirectUrl(Failure failure, out string? redirectUrl)
+    {
+        redirectUrl = null;
+        
+        if (failure.MetaData == null) return false;
+
+        if (failure.MetaData.TryGetValue("RedirectUrl", out var url))
+        {
+            redirectUrl = url.ToString();
+            return true;
+        }
+
+        return false;
+    }
 }
