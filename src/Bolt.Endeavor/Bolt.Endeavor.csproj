@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Version>0.0.1-beta07</Version>
+        <Nullable>enable</Nullable>
+        <Authors>Mohammad Ruhul Amin</Authors>
+        <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
+        <PackageTags>MaySucceed</PackageTags>
+        <PackageId>Bolt.Endeavor</PackageId>
+        <RootNamespace>Bolt.Endeavor</RootNamespace>
+        <Description>Define a generic response which indicates whether the response succeed or failed</Description>
+    </PropertyGroup>
+
+</Project>

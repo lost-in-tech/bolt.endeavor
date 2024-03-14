@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed", "src\Bolt.MaySucceed\Bolt.MaySucceed.csproj", "{4FB0A4A7-405F-45AA-A650-FC60C3103790}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor", "src\Bolt.Endeavor\Bolt.Endeavor.csproj", "{4FB0A4A7-405F-45AA-A650-FC60C3103790}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA058193-22CB-47A4-8023-ED4369A917AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Tests", "src\Bolt.MaySucceed.Tests\Bolt.MaySucceed.Tests.csproj", "{BDFB18BF-5441-4D93-B295-17743F7E3D89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Tests", "src\Bolt.Endeavor.Tests\Bolt.Endeavor.Tests.csproj", "{BDFB18BF-5441-4D93-B295-17743F7E3D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Bus", "Bolt.MaySucceed.Extensions.Bus\Bolt.MaySucceed.Extensions.Bus.csproj", "{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus", "Bolt.Endeavor.Extensions.Bus\Bolt.Endeavor.Extensions.Bus.csproj", "{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Composers", "Bolt.MaySucceed.Extensions.Composers\Bolt.MaySucceed.Extensions.Composers.csproj", "{389B7814-E71A-4851-9050-E59C287B508F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Composers", "Bolt.Endeavor.Extensions.Composers\Bolt.Endeavor.Extensions.Composers.csproj", "{389B7814-E71A-4851-9050-E59C287B508F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.MaySucceed.Extensions.Bus.FluentValidation", "Bolt.MaySucceed.Extensions.Bus.FluentValidation\Bolt.MaySucceed.Extensions.Bus.FluentValidation.csproj", "{4099386A-12AE-4730-83F5-3C603AE2F05F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus.FluentValidation", "Bolt.Endeavor.Extensions.Bus.FluentValidation\Bolt.Endeavor.Extensions.Bus.FluentValidation.csproj", "{4099386A-12AE-4730-83F5-3C603AE2F05F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

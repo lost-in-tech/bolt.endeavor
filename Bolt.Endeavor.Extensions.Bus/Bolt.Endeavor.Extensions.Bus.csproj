@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Version>0.0.1-beta07</Version>
+        <Nullable>enable</Nullable>
+        <Authors>Mohammad Ruhul Amin</Authors>
+        <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
+        <PackageId>Bolt.Endeavor.Extensions.Bus</PackageId>
+        <PackageTags>MaySucceed,RequestBus,CQS,CQRS</PackageTags>
+        <Description>Request bus based on MaySucceed response</Description>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\Bolt.Endeavor\Bolt.Endeavor.csproj" />
+    </ItemGroup>
+
+</Project>
