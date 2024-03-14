@@ -19,6 +19,9 @@ public readonly struct MayBe<T>
     
     [MemberNotNullWhen(false, nameof(Value))]
     public bool IsNone { get; init; }
+    
+    [MemberNotNullWhen(true, nameof(Value))]
+    public bool HasValue { get; init; }
 
     public static implicit operator T?(MayBe<T> mayBe) => mayBe.Value;
     public static implicit operator MayBe<T>(T? value) => new(value);
