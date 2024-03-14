@@ -19,12 +19,12 @@ jobs:
         with:
           dotnet-version: "8.0.x"
       - name: Install dependencies
-        run: dotnet restore ./Bolt.MaySucceed.sln
+        run: dotnet restore ./Bolt.Endeavor.sln
       - name: Build
-        run: dotnet build ./Bolt.MaySucceed.sln --configuration Release --no-restore
+        run: dotnet build ./Bolt.Endeavor.sln --configuration Release --no-restore
       - name: Test
-        run: dotnet test ./Bolt.MaySucceed.sln --no-restore --verbosity normal
+        run: dotnet test ./Bolt.Endeavor.sln --no-restore --verbosity normal
       - name: Pack
-        run: dotnet pack ./Bolt.MaySucceed.sln -c Release --no-build --output ../nupkgs
+        run: dotnet pack ./Bolt.Endeavor.sln -c Release --no-build --output ../nupkgs
       - name: Publish
         run: dotnet nuget push ../nupkgs/**.nupkg -s https://www.nuget.org/api/v2/package/ -k ${{ secrets.nugetkey }} --skip-duplicate
