@@ -31,7 +31,22 @@ public readonly struct MaySucceed
 
     private static readonly MaySucceed Instance = new();
     public static MaySucceed Ok() => Instance;
+    public static MaySucceed Ok(Dictionary<string,object> metaData) => Instance with
+    {
+        MetaData = metaData
+    };
+    public static MaySucceed Ok(int statusCode) => new()
+    {
+        StatusCode = statusCode
+    };
+    public static MaySucceed Ok(int statusCode, Dictionary<string,object> metaData) 
+        => Ok(statusCode) with
+        {
+            MetaData = metaData
+        };
+
     public static MaySucceed<T> Ok<T>(T value) => new(value);
+    public static MaySucceed<T> Ok<T>(int statusCode, T value) => MaySucceed<T>.Ok(statusCode, value);
 
     public static implicit operator MaySucceed(bool isSucceed) => isSucceed
         ? Instance
@@ -47,6 +62,8 @@ public readonly struct MaySucceed
     {
         return new Failure(errors);
     }
+
+    public Dictionary<string, object>? MetaData { get; init; } 
 }
 
 public readonly struct MaySucceed<T>
@@ -86,6 +103,22 @@ public readonly struct MaySucceed<T>
     [MaybeNull] public T Value { get; init; }
 
     public static MaySucceed<T> Ok(T value) => new(value);
+    public static MaySucceed<T> Ok(T value, Dictionary<string,object> metaData) => new(value)
+    {
+        MetaData = metaData
+    };
+    public static MaySucceed<T> Ok(int statusCode, T value) => new(value)
+    {
+        StatusCode = statusCode
+    };
+    
+    public static MaySucceed<T> Ok(int statusCode, T value, Dictionary<string,object> metaData) => new(value)
+    {
+        StatusCode = statusCode,
+        MetaData = metaData
+    };
+
+    public Dictionary<string, object>? MetaData { get; init; }
 
     public static implicit operator T?(MaySucceed<T> value) => value.Value;
     

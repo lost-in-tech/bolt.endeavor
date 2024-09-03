@@ -29,10 +29,9 @@ public abstract class RequestValidator<TRequest> : IRequestValidator<TRequest>
 
     public virtual bool IsApplicable(IBusContextReader context, TRequest request) => true;
 
-    ValueTask<MaySucceed> IRequestValidator<TRequest>.Validate(IBusContextReader context, 
-        TRequest input, 
-        CancellationToken cancellationToken) 
-        => ValueTask.FromResult(Validate(input));
+    ValueTask<MaySucceed> IRequestValidator<TRequest>.Validate(IBusContextReader context, TRequest input,
+        CancellationToken cancellationToken) =>
+        new(Validate(input));
 
     protected abstract MaySucceed Validate(TRequest input);
 }

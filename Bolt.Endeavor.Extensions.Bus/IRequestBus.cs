@@ -8,6 +8,15 @@ public interface IRequestBus
     /// <param name="request"></param>
     /// <param name="ct"></param>
     /// <typeparam name="TRequest"></typeparam>
+    /// <returns></returns>
+    Task<MaySucceed> Send<TRequest>(TRequest request, CancellationToken ct = default);
+    
+    /// <summary>
+    /// Send requests to process and return response which may succeed or not
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     Task<MaySucceed<TResponse>> Send<TRequest, TResponse>(TRequest request, CancellationToken ct = default);
