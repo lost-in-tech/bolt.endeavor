@@ -24,9 +24,9 @@ internal sealed class LogScopeMiddleware(RequestDelegate next,
         }
     }
 
-    private Dictionary<string, string> BuildScopeData()
+    private Dictionary<string, object> BuildScopeData()
     {
-        var result = new Dictionary<string, string>();
+        var result = new Dictionary<string, object>();
         
         foreach (var provider in providers)
         {

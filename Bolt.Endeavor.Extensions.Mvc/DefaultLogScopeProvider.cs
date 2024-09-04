@@ -9,7 +9,7 @@ internal sealed class DefaultLogScopeProvider(ITraceIdProvider traceIdProvider,
     IHttpContextWrapper httpContextWrapper,
     IHostEnvironment hostEnvironment) : ILogScopeProvider
 {
-    public IEnumerable<(string Name, string Value)> Get()
+    public IEnumerable<(string Name, object Value)> Get()
     {
         var traceId = traceIdProvider.Get();
         var tenant = currentTenantProvider.Get();
