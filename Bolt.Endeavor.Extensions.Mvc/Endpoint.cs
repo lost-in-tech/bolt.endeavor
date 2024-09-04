@@ -8,13 +8,13 @@ public interface IEndpoint
     void Configure(IEndpointRouteBuilder builder);
 }
 
-public abstract class Endpoint : IEndpoint
+public abstract class EndpointBase : IEndpoint
 {
     string? IEndpoint.GroupName => null;
     public abstract void Configure(IEndpointRouteBuilder builder);
 }
 
-public abstract class Endpoint<TGroup> : IEndpoint
+public abstract class EndpointBase<TGroup> : IEndpoint
 {
     string? IEndpoint.GroupName => typeof(TGroup).AssemblyQualifiedName;
     public abstract void Configure(IEndpointRouteBuilder builder);

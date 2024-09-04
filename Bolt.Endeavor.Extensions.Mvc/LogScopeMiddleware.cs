@@ -5,11 +5,11 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 
 internal sealed class LogScopeMiddleware(RequestDelegate next,
     IEnumerable<ILogScopeProvider> providers,
-    IDataKeySettings settings,
     ITraceIdProvider traceIdProvider,
     ILogger<LogScopeMiddleware> logger)
 {
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, 
+        IDataKeySettings settings)
     {
         using (logger.BeginScope(BuildScopeData()))
         {
