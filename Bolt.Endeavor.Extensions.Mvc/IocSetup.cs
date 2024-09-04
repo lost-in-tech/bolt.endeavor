@@ -63,7 +63,7 @@ public static class IocSetup
 
         foreach (var typePair in types)
         {
-            services.AddTransient(typePair.InterfaceType, typePair.ImplementationType);
+            services.TryAddEnumerable(ServiceDescriptor.Transient(typePair.InterfaceType, typePair.ImplementationType));
         }
     }
 
