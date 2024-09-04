@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>0.0.2-beta02</Version>
+        <Version>0.0.2-beta03</Version>
         <Authors>Mohammad Ruhul Amin</Authors>
         <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
         <PackageId>Bolt.Endeavor.Extensions.Mvc</PackageId>

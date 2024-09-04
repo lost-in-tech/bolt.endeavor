@@ -15,8 +15,6 @@ internal sealed class DefaultLogScopeProvider(ITraceIdProvider traceIdProvider,
         var tenant = currentTenantProvider.Get();
         var userId = currentUserProvider.Get().UserId;
 
-        var data = new Dictionary<string, string>();
-
         if (traceId.HasValue()) yield return (options.TraceIdLogKey, traceId);
         if (tenant.HasValue()) yield return (options.TenantLogKey, tenant);
         if (userId.HasValue()) yield return (options.UserIdLogKey, userId);
