@@ -1,3 +1,5 @@
+using System.Reflection;
+using Bolt.Endeavor.Extensions.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -26,7 +28,29 @@ public static class IocSetup
         services.TryAddSingleton<ICurrentTenantProvider,CurrentTenantProvider>();
         services.TryAddSingleton<ICurrentUserProvider,CurrentUserProvider>();
 
+        if (options.AutoRegister)
+        {
+            foreach (var assembly in options.AssembliesToScan)
+            {
+                AddServices(services, assembly, typeof(IRequestValidator<>));
+                AddServices(services, assembly, typeof(IRequestHandler<,>));
+                AddServices(services, assembly, typeof(IProcessFilter<,>));
+            }
+        }
+        
         return services;
+    }
+    
+    private static void AddServices(IServiceCollection services, Assembly assembly, Type interfaceType)
+    {
+        ServiceDescriptor[] serviceDescriptors = assembly
+            .DefinedTypes
+            .Where(type => type is { IsAbstract: false, IsInterface: false } &&
+                           type.IsAssignableTo(interfaceType))
+            .Select(type => ServiceDescriptor.Transient(interfaceType, type))
+            .ToArray();
+
+        services.TryAddEnumerable(serviceDescriptors);
     }
 
     /// <summary>
@@ -44,6 +68,9 @@ public static class IocSetup
 
 public record RequestBusMvcOptions : IDataKeySettings
 {
+    public bool AutoRegister { get; init; } = true;
+    public Assembly[] AssembliesToScan = [Assembly.GetEntryAssembly()];
+    
     public string TraceIdHeaderName { get; init; } = "x-trace-id"; 
     public string ConsumerIdHeaderName { get; init; } = "x-app-id";
     public string TenantHeaderName { get; init; } = "x-tenant";

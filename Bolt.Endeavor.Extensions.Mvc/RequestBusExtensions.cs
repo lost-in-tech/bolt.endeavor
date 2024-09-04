@@ -7,9 +7,9 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 
 public static class RequestBusExtensions
 {
-    public static async Task<IResult> Result<TRequest, TResponse>(this IRequestBus bus, TRequest request)
+    public static async Task<IResult> Result<TRequest, TResponse>(this IRequestBus bus, TRequest request, CancellationToken ct)
     {
-        var rsp = await bus.Send<TRequest, TResponse>(request);
+        var rsp = await bus.Send<TRequest, TResponse>(request, ct);
 
         
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
@@ -44,9 +44,9 @@ public static class RequestBusExtensions
         return TypedResults.StatusCode(rsp.StatusCode);
     }
     
-    public static async Task<IResult> Result<TRequest>(this IRequestBus bus, TRequest request)
+    public static async Task<IResult> Result<TRequest>(this IRequestBus bus, TRequest request, CancellationToken ct)
     {
-        var rsp = await bus.Send(request);
+        var rsp = await bus.Send(request, ct);
 
         
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
