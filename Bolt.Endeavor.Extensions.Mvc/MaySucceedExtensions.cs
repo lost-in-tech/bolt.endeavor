@@ -1,4 +1,4 @@
-namespace Bolt.Endeavor.Extensions.Bus;
+namespace Bolt.Endeavor.Extensions.Mvc;
 
 public static class MaySucceedExtensions
 {

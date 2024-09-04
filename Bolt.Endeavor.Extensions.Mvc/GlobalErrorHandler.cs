@@ -6,7 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Bolt.Endeavor.Extensions.Mvc;
 
-public class GlobalErrorHandler(ILogger<GlobalErrorHandler> logger, IHostEnvironment environment) : IExceptionHandler
+internal class GlobalErrorHandler(ILogger<GlobalErrorHandler> logger, 
+    IHostEnvironment environment,
+    IDataKeySettings options) : IExceptionHandler
 {
     private static readonly string[] EnvWhiteList = ["development","dev","local","test"];
     
@@ -23,8 +25,8 @@ public class GlobalErrorHandler(ILogger<GlobalErrorHandler> logger, IHostEnviron
         var traceId = Activity.Current?.TraceId.ToString() ?? httpContext.TraceIdentifier;
         
         httpContext.Response.StatusCode = statusCode;
-        httpContext.Response.Headers["x-trace-id"] = traceId; 
-        await httpContext.Response.WriteAsJsonAsync(new ApiProblemDetails
+        httpContext.Response.Headers[options.TraceIdHeaderName] = traceId; 
+        await httpContext.Response.WriteAsJsonAsync(new 
         {
             TraceId = traceId,
             Title = isDevEnv ? $"{exception.GetType().FullName} : {exception.Message}" : "An unhandled error occured",

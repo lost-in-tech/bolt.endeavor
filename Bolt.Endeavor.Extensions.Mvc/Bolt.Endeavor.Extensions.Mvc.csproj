@@ -4,6 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>0.0.1-beta08</Version>
+        <Authors>Mohammad Ruhul Amin</Authors>
+        <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
+        <PackageId>Bolt.Endeavor.Extensions.Mvc</PackageId>
+        <PackageTags>MaySucceed,RequestBus,CQS,CQRS</PackageTags>
+        <Description>A helper library to make development of mvc application easy using request bus</Description>
     </PropertyGroup>
 
     <ItemGroup>

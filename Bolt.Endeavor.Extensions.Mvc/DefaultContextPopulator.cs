@@ -1,4 +1,6 @@
-namespace Bolt.Endeavor.Extensions.Bus.Impl;
+using Bolt.Endeavor.Extensions.Bus;
+
+namespace Bolt.Endeavor.Extensions.Mvc;
 
 internal sealed class DefaultContextPopulator(
     ICurrentTenantProvider tenantProvider,

@@ -87,7 +87,7 @@ public static class RequestBusExtensions
             Extensions =
             {
                 ["traceId"] = Activity.Current?.TraceId.ToString(),
-                ["errors"] = failure.Errors?.Select(x => new ApiProblemDetailsError
+                ["errors"] = failure.Errors?.Select(x => new 
                 {
                     Name = x.PropertyName,
                     Reason = x.Message,

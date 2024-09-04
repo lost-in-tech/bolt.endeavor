@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
-        <Version>0.0.1-beta07</Version>
+        <Version>0.0.1-beta08</Version>
         <Nullable>enable</Nullable>
         <Authors>Mohammad Ruhul Amin</Authors>
         <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>

@@ -3,8 +3,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace Bolt.Endeavor.Extensions.Mvc;
 
-public sealed class TraceIdHttpHandler(ITraceIdProvider traceIdProvider,
-    IHostEnvironment hostEnvironment) : DelegatingHandler
+internal sealed class TraceIdHttpHandler(ITraceIdProvider traceIdProvider,
+    IHostEnvironment hostEnvironment,
+    IDataKeySettings options) : DelegatingHandler
 {
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
@@ -13,10 +14,10 @@ public sealed class TraceIdHttpHandler(ITraceIdProvider traceIdProvider,
 
         if (!string.IsNullOrWhiteSpace(traceId))
         {
-            request.Headers.Add(Constants.HeaderTraceId, traceId);
+            request.Headers.Add(options.TraceIdHeaderName, traceId);
         }
 
-        request.Headers.Add(Constants.HeaderConsumerId, Uri.EscapeDataString(hostEnvironment.ApplicationName));
+        request.Headers.Add(options.ConsumerIdHeaderName, Uri.EscapeDataString(hostEnvironment.ApplicationName));
 
         return base.SendAsync(request, cancellationToken);
     }

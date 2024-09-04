@@ -1,4 +1,6 @@
-namespace Bolt.Endeavor.Extensions.Bus;
+using Bolt.Endeavor.Extensions.Bus;
+
+namespace Bolt.Endeavor.Extensions.Mvc;
 
 public interface ITraceIdProvider
 {
