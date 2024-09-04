@@ -96,7 +96,7 @@ public static class IocSetup
 public record RequestBusMvcOptions : IDataKeySettings
 {
     public bool AutoRegister { get; init; } = true;
-    public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetEntryAssembly()];
+    public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
 
     public string TraceIdHeaderName { get; init; } = "x-trace-id";

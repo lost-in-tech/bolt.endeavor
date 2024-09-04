@@ -10,7 +10,7 @@ public static class EndpointExtensions
     public static IServiceCollection AddEndpoints(
         this IServiceCollection services)
     {
-        return services.AddEndpoints([Assembly.GetEntryAssembly()]);
+        return services.AddEndpoints([Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()]);
     }
     
     public static IServiceCollection AddEndpoints<T>(
