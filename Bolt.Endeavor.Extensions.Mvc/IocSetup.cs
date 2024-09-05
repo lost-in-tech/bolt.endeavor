@@ -2,6 +2,7 @@ using System.Reflection;
 using Bolt.Endeavor.Extensions.Bus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -10,6 +11,7 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 public static class IocSetup
 {
     public static IServiceCollection AddRequestBusForMvc(this IServiceCollection services,
+        IConfiguration configuration,
         RequestBusMvcOptions? options = null)
     {
         options ??= new RequestBusMvcOptions();
@@ -34,6 +36,8 @@ public static class IocSetup
         {
             services.AddExceptionHandler<GlobalErrorHandler>();
         }
+        
+        services.ScanAndConfigure(configuration, options.AssembliesToScan);
 
         if (options.AutoRegister)
         {

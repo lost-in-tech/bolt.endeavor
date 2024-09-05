@@ -4,12 +4,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bolt.Endeavor.Extensions.Mvc;
 
-public static class OptionsExtensions
+internal static class OptionsExtensions
 {
-    public static void ScanAndConfigure(this IServiceCollection services, IConfiguration configuration)
+    internal static void ScanAndConfigure(this IServiceCollection services, 
+        IConfiguration configuration)
+    {
+        ScanAndConfigure(services, configuration, [Assembly.GetExecutingAssembly()]);
+    }
+    
+    internal static void ScanAndConfigure(this IServiceCollection services, 
+        IConfiguration configuration,
+        Assembly[] assemblies)
     {
         // Get all types with BindFromConfigAttribute
-        var configTypes = AppDomain.CurrentDomain.GetAssemblies()
+        var configTypes = assemblies
             .SelectMany(a => a.GetTypes())
             .Where(t => t.IsClass && !t.IsAbstract)
             .Select(t => new
