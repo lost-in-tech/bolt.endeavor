@@ -7,15 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor", "src\Bolt.E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA058193-22CB-47A4-8023-ED4369A917AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Tests", "src\Bolt.Endeavor.Tests\Bolt.Endeavor.Tests.csproj", "{BDFB18BF-5441-4D93-B295-17743F7E3D89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Tests", "tests\Bolt.Endeavor.Tests\Bolt.Endeavor.Tests.csproj", "{BDFB18BF-5441-4D93-B295-17743F7E3D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus", "Bolt.Endeavor.Extensions.Bus\Bolt.Endeavor.Extensions.Bus.csproj", "{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus", "src\Bolt.Endeavor.Extensions.Bus\Bolt.Endeavor.Extensions.Bus.csproj", "{011D2F9E-49B1-4E01-A7E9-6A97013B10EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Composers", "Bolt.Endeavor.Extensions.Composers\Bolt.Endeavor.Extensions.Composers.csproj", "{389B7814-E71A-4851-9050-E59C287B508F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Composers", "src\Bolt.Endeavor.Extensions.Composers\Bolt.Endeavor.Extensions.Composers.csproj", "{389B7814-E71A-4851-9050-E59C287B508F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus.FluentValidation", "Bolt.Endeavor.Extensions.Bus.FluentValidation\Bolt.Endeavor.Extensions.Bus.FluentValidation.csproj", "{4099386A-12AE-4730-83F5-3C603AE2F05F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bus.FluentValidation", "src\Bolt.Endeavor.Extensions.Bus.FluentValidation\Bolt.Endeavor.Extensions.Bus.FluentValidation.csproj", "{4099386A-12AE-4730-83F5-3C603AE2F05F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Mvc", "Bolt.Endeavor.Extensions.Mvc\Bolt.Endeavor.Extensions.Mvc.csproj", "{162D056A-6514-460E-9E3C-3B54D53A6040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Mvc", "src\Bolt.Endeavor.Extensions.Mvc\Bolt.Endeavor.Extensions.Mvc.csproj", "{162D056A-6514-460E-9E3C-3B54D53A6040}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Tracing", "Src\Bolt.Endeavor.Extensions.Tracing\Bolt.Endeavor.Extensions.Tracing.csproj", "{7542005D-0FDF-48C3-87D6-534B9C753FBC}"
 EndProject
