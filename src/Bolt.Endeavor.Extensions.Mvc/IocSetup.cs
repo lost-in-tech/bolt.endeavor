@@ -39,7 +39,9 @@ public static class IocSetup
         {
             services.AddExceptionHandler<GlobalErrorHandler>();
         }
-        
+
+        services.AddHttpClient();
+        services.AddEndpoints(options.AssembliesToScan);
         services.ScanAndConfigure(configuration, options.AssembliesToScan);
 
         if (options.AutoRegister)

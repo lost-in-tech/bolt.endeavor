@@ -13,7 +13,7 @@ public static class IocSetup
         
         services.TryAddTransient<TracingHttpMessageHandler>();
         services.TryAddTransient<IHttpMessageHandlerBuilderFilter,HttpMessageBuilder>();
-        
+        services.TryAddTransient<ILogScopeProvider,DefaultLogScopeProvider>();
         services.TryAddSingleton<ITracingKeySettings>(options);
         services.TryAddEnumerable(ServiceDescriptor.Transient<ILogScopeProvider, DefaultLogScopeProvider>());
         services.TryAddEnumerable(ServiceDescriptor.Transient<IHttpTracingHeadersProvider, HttpTracingHeadersProvider>());

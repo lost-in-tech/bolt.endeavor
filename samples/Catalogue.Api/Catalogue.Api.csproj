@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>Bookworm.Catalogue.Api</RootNamespace>
+        <AssemblyName>Bookworm.Catalogue.Api</AssemblyName>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bolt.IocScanner" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Bolt.Endeavor.Extensions.Bus.FluentValidation\Bolt.Endeavor.Extensions.Bus.FluentValidation.csproj" />
+      <ProjectReference Include="..\..\src\Bolt.Endeavor.Extensions.Mvc\Bolt.Endeavor.Extensions.Mvc.csproj" />
+      <ProjectReference Include="..\Catalogue.Api.Contracts\Catalogue.Api.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Logs\" />
+    </ItemGroup>
+
+</Project>

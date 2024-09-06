@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>12</LangVersion>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Bookworm.Catalogue.Api.Contracts</RootNamespace>
+        <AssemblyName>Bookworm.Catalogue.Api.Contracts</AssemblyName>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+</Project>
