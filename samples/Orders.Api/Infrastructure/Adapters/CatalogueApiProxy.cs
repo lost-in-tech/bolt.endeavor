@@ -5,7 +5,7 @@ using Bookworm.Orders.Api.Features.Shared.Ports;
 using Catalogue.Api.Contracts;
 using Microsoft.Extensions.Options;
 
-namespace Bookworm.Orders.Api.Infrastructure.Ports;
+namespace Bookworm.Orders.Api.Infrastructure.Adapters;
 
 [AutoBind]
 internal sealed class CatalogueApiProxy(
@@ -31,7 +31,7 @@ internal sealed class CatalogueApiProxy(
             return result!;
         }
         
-        logger.LogError("Catalogue ap get books by id failed {path} {statusCode}", path, rsp.StatusCode);
+        logger.LogError("Catalogue api for {path} failed with {statusCode}", path, rsp.StatusCode);
 
         return HttpFailure.InternalServerError("Catalogue api request failed");
     }

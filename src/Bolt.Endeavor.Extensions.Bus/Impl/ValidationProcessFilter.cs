@@ -1,25 +1,28 @@
-﻿namespace Bolt.Endeavor.Extensions.Bus.Impl;
+﻿using Microsoft.Extensions.Logging;
 
-internal sealed class ValidationProcessFilter<TRequest,TResponse> : ProcessFilter<TRequest, TResponse>
+namespace Bolt.Endeavor.Extensions.Bus.Impl;
+
+internal sealed class ValidationProcessFilter<TRequest, TResponse>(
+    IEnumerable<IRequestValidator<TRequest>> validators,
+    ILogger<RequestBus> logger)
+    : ProcessFilter<TRequest, TResponse>
 {
-    private readonly IEnumerable<IRequestValidator<TRequest>> _validators;
-
-    public ValidationProcessFilter(IEnumerable<IRequestValidator<TRequest>> validators)
-    {
-        _validators = validators;
-    }
-
     public override async Task<MaySucceed<TRequest>> Apply(IBusContext context, 
         TRequest request, 
         CancellationToken cancellationToken)
     {
-        foreach (var validator in _validators.OrderBy(x => x.Priority))
+        foreach (var validator in validators.OrderBy(x => x.Priority))
         {
             if (validator.IsApplicable(context, request) == false) continue;
 
             var rsp = await validator.Validate(context, request, cancellationToken);
 
-            if (!rsp.IsSucceed) return rsp.Failure;
+            if (!rsp.IsSucceed)
+            {
+                logger.LogDebug("Validation failed for {requestType}", typeof(TRequest));
+                
+                return rsp.Failure;
+            }
         }
 
         return request;
