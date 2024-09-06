@@ -1,4 +1,5 @@
 using Bolt.Endeavor.Extensions.Bus;
+using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
@@ -6,7 +7,8 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 
 internal sealed class CurrentTenantProvider(
     IHttpContextAccessor context, 
-    IDataKeySettings options) 
+    IDataKeySettings options,
+    ITracingKeySettings tracingKeySettings) 
     : ICurrentTenantProvider
 {
     public string Get()
@@ -22,7 +24,7 @@ internal sealed class CurrentTenantProvider(
             return qTenant.ToString();
         }
 
-        if (context.HttpContext.Request.Headers.TryGetValue(options.TenantHeaderName, out var hTenant))
+        if (context.HttpContext.Request.Headers.TryGetValue(tracingKeySettings.TenantHeaderKey, out var hTenant))
         {
             return hTenant.ToString();
         }

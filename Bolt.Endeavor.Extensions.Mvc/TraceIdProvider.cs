@@ -1,18 +1,19 @@
 using System.Diagnostics;
+using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Http;
 
 namespace Bolt.Endeavor.Extensions.Mvc;
 
 internal sealed class TraceIdProvider(
     IHttpContextAccessor contextAccessor, 
-    IDataKeySettings options) 
+    ITracingKeySettings options) 
     : ITraceIdProvider
 {
     public string Get()
     {
         var traceId = contextAccessor.HttpContext == null
             ? null
-            : contextAccessor.HttpContext.Request.Headers.TryGetValue(options.TraceIdHeaderName, out var headerTraceId)
+            : contextAccessor.HttpContext.Request.Headers.TryGetValue(options.TraceIdHeaderKey, out var headerTraceId)
                 ? headerTraceId.ToString()
                 : null;
 

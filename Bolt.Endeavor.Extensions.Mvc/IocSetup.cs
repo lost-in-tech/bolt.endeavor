@@ -1,5 +1,6 @@
 using System.Reflection;
 using Bolt.Endeavor.Extensions.Bus;
+using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -26,12 +27,15 @@ public static class IocSetup
         services.AddLogging();
         services.AddHttpContextAccessor();
         services.TryAddSingleton<IHttpContextWrapper, HttpContextWrapper>();
-        services.TryAddSingleton<ILogScopeProvider, DefaultLogScopeProvider>();
         services.TryAddSingleton<ITraceIdProvider, TraceIdProvider>();
         services.TryAddSingleton<ICurrentTenantProvider, CurrentTenantProvider>();
         services.TryAddSingleton<ICurrentUserProvider, CurrentUserProvider>();
         services.TryAddSingleton<IExceptionHandler, GlobalErrorHandler>();
 
+        services.TryAddSingleton<ITraceContextProvider, TraceContextProvider>();
+        services.AddTracingFeatures(options.TracingOptions);
+        
+        
         if (options.UseDefaultGlobalErrorHandler)
         {
             services.AddExceptionHandler<GlobalErrorHandler>();
@@ -59,7 +63,7 @@ public static class IocSetup
 
     private static void AddServices(IServiceCollection services, Assembly assembly, IEnumerable<Type> openGenericTypes)
     {
-        var types = assembly.GetExportedTypes()
+        var types = assembly.GetTypes()
             .Where(t => t is { IsAbstract: false, IsInterface: false })
             .SelectMany(t => t.GetInterfaces(), (type, i) => new { ImplementationType = type, InterfaceType = i })
             .Where(t => openGenericTypes.Any(openGenericType => IsMatch(t.InterfaceType, openGenericType)))
@@ -103,15 +107,8 @@ public record RequestBusMvcOptions : IDataKeySettings
     public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
 
-    public string TraceIdHeaderName { get; init; } = "x-trace-id";
-    public string ConsumerIdHeaderName { get; init; } = "x-app-id";
-    public string TenantHeaderName { get; init; } = "x-tenant";
     public string TenantRouteName { get; init; } = "tenant";
     public string TenantQueryName { get; init; } = "tenant";
-
-    public string TraceIdLogKey { get; init; } = "traceId";
-    public string TenantLogKey { get; init; } = "tenant";
-    public string UserIdLogKey { get; init; } = "userId";
-    public string AppIdLogKey { get; init; } = "appId";
-    public string ConsumerIdLogKey { get; init; } = "consumerId";
+    
+    public TracingIocSetupOptions? TracingOptions { get; init; }
 }

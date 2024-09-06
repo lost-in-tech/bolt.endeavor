@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Bolt.Endeavor.Extensions.Bus\Bolt.Endeavor.Extensions.Bus.csproj"/>
+        <ProjectReference Include="..\Src\Bolt.Endeavor.Extensions.Tracing\Bolt.Endeavor.Extensions.Tracing.csproj" />
         <ProjectReference Include="..\src\Bolt.Endeavor\Bolt.Endeavor.csproj"/>
     </ItemGroup>
 

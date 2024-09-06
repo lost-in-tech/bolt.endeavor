@@ -1,4 +1,3 @@
-using Bolt.Endeavor.Extensions.Bus;
 using Microsoft.AspNetCore.Http;
 
 namespace Bolt.Endeavor.Extensions.Mvc;

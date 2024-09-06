@@ -1,4 +1,4 @@
-namespace Bolt.Endeavor.Extensions.Mvc;
+namespace Bolt.Endeavor.Extensions.Tracing;
 
 public interface ILogScopeProvider
 {

@@ -1,3 +1,4 @@
+using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -9,13 +10,13 @@ internal sealed class LogScopeMiddleware(RequestDelegate next,
     ILogger<LogScopeMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context, 
-        IDataKeySettings settings)
+        ITracingKeySettings settings)
     {
         using (logger.BeginScope(BuildScopeData()))
         {
             context.Response.OnStarting(() =>
             {
-                context.Response.Headers[settings.TraceIdHeaderName] = traceIdProvider.Get();
+                context.Response.Headers[settings.TraceIdHeaderKey] = traceIdProvider.Get();
 
                 return Task.CompletedTask;
             });
