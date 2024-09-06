@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Mvc", "Bolt.Endeavor.Extensions.Mvc\Bolt.Endeavor.Extensions.Mvc.csproj", "{162D056A-6514-460E-9E3C-3B54D53A6040}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Tracing", "Src\Bolt.Endeavor.Extensions.Tracing\Bolt.Endeavor.Extensions.Tracing.csproj", "{7542005D-0FDF-48C3-87D6-534B9C753FBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{162D056A-6514-460E-9E3C-3B54D53A6040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{162D056A-6514-460E-9E3C-3B54D53A6040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{162D056A-6514-460E-9E3C-3B54D53A6040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7542005D-0FDF-48C3-87D6-534B9C753FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7542005D-0FDF-48C3-87D6-534B9C753FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7542005D-0FDF-48C3-87D6-534B9C753FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7542005D-0FDF-48C3-87D6-534B9C753FBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89} = {BA058193-22CB-47A4-8023-ED4369A917AC}
