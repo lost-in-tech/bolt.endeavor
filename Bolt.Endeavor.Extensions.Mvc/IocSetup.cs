@@ -35,7 +35,6 @@ public static class IocSetup
         services.TryAddSingleton<ITraceContextProvider, TraceContextProvider>();
         services.AddTracingFeatures(options.TracingOptions);
         
-        
         if (options.UseDefaultGlobalErrorHandler)
         {
             services.AddExceptionHandler<GlobalErrorHandler>();
