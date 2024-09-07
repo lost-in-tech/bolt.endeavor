@@ -32,7 +32,7 @@ internal sealed class CatalogueApiProxy(
         }
         
         logger.LogError("Catalogue api for {path} failed with {statusCode}", path, rsp.StatusCode);
-
+        
         return HttpFailure.InternalServerError("Catalogue api request failed");
     }
 }
