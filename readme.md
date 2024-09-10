@@ -89,3 +89,60 @@ public Task<MaySucceed> DoSomething()
 }
 
 ```
+
+# Bolt.Endeavor.Extensions.Bus
+
+A request bus based on MaySucceed response.
+
+## How to use this library
+
+Add following package in your project.
+
+```xml
+<PackageReference Include="Bolt.Endeavor.Extensions.Bus" Version="<latest version>"/>
+```
+
+Register request bus in your IOC.
+
+```csharp
+services.AddRequestBus();
+```
+
+Define a request dto.
+
+```csharp
+public record CreateBookRequest
+{ ... }
+```
+
+a response dot.
+
+```csharp
+public record CreateBookResponse{...}
+```
+
+now define a handler to handle CreateBookRequest as below:
+
+```csharp
+public class CreateBookHandler : RequestHandlerAsync<CreateBookRequest, CreateBookResponse>
+{
+     public override async Task<MaySucceed<CreateBookResponse>> Handle(
+        IBusContextReader context, 
+        GetBookByIdRequest request, 
+        CancellationToken cancellationToken) 
+     {         
+         //if(succeed) return new CreateBookResponse{...};
+         
+         //if(failed) return failure instance;
+     }
+}
+```
+
+Make sure you register this handler in your IOC as below:
+
+```csharp
+services.TryAddTransient<IRequestHandler<CreateBookRequest,CreateBookResponse>, CreateBookHandler>();
+```
+
+you can now call `IRequestbus.SendAsync<CreateBookRequest,CreateBookResponse>(new CreateBookRequest{...})`. This will execute the handler and any validator your defined for this Request.
+

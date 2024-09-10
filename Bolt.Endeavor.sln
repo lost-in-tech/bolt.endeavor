@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionF
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalogue.Api.Tests", "samples\Bookworm.Catalogue.Api.Tests\Catalogue.Api.Tests.csproj", "{548E4D06-D37C-44E8-A45A-FA441876E894}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{752608C2-9AA7-466A-B580-0438D10F8598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{752608C2-9AA7-466A-B580-0438D10F8598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{752608C2-9AA7-466A-B580-0438D10F8598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548E4D06-D37C-44E8-A45A-FA441876E894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548E4D06-D37C-44E8-A45A-FA441876E894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548E4D06-D37C-44E8-A45A-FA441876E894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548E4D06-D37C-44E8-A45A-FA441876E894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89} = {BA058193-22CB-47A4-8023-ED4369A917AC}
@@ -94,5 +100,6 @@ Global
 		{1E753C22-E94D-4446-AF2D-B0570570A707} = {70812150-DF95-4EB6-8E17-C970F58E8657}
 		{EEF531F1-E779-4F51-BC5D-78CE3DFACBC8} = {70812150-DF95-4EB6-8E17-C970F58E8657}
 		{752608C2-9AA7-466A-B580-0438D10F8598} = {70812150-DF95-4EB6-8E17-C970F58E8657}
+		{548E4D06-D37C-44E8-A45A-FA441876E894} = {70812150-DF95-4EB6-8E17-C970F58E8657}
 	EndGlobalSection
 EndGlobal

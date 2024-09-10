@@ -10,7 +10,7 @@ builder.Host.UseSerilog((context, sp, logConfig) =>
     logConfig.ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services.AddRequestBusForMvc(builder.Configuration);
+builder.Services.AddRequestBusForMvc<Program>(builder.Configuration);
 builder.Services.Scan<Program>(new()
 {
     SkipWhenAutoBindMissing = true
@@ -36,3 +36,5 @@ app.MapEndpoints();
 app.UseExceptionHandler("/");
 
 app.Run();
+
+public partial class Program{}
