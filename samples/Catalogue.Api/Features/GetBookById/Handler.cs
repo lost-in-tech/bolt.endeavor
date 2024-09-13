@@ -1,10 +1,12 @@
 using Bolt.Endeavor;
 using Bolt.Endeavor.Extensions.Bus;
+using Bolt.IocScanner.Attributes;
+using Bookworm.Catalogue.Api.Contracts;
 using Bookworm.Catalogue.Api.Features.Shared.Ports;
-using Catalogue.Api.Contracts;
 
 namespace Bookworm.Catalogue.Api.Features.GetBookById;
 
+[AutoBind]
 public class Handler(
     IBooksRepository booksRepository, 
     ILogger<Handler> logger) 

@@ -32,6 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Bolt.Endeavor.Extensions.Mvc.TestHelpers\Bolt.Endeavor.Extensions.Mvc.TestHelpers.csproj" />
       <ProjectReference Include="..\Catalogue.Api\Catalogue.Api.csproj" />
     </ItemGroup>
 

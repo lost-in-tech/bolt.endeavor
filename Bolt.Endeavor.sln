@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalogue.Api.Tests", "samples\Bookworm.Catalogue.Api.Tests\Catalogue.Api.Tests.csproj", "{548E4D06-D37C-44E8-A45A-FA441876E894}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Endeavor.Extensions.Mvc.TestHelpers", "src\Bolt.Endeavor.Extensions.Mvc.TestHelpers\Bolt.Endeavor.Extensions.Mvc.TestHelpers.csproj", "{8D500901-0890-47DC-AEDF-92E7B832741F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{548E4D06-D37C-44E8-A45A-FA441876E894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{548E4D06-D37C-44E8-A45A-FA441876E894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{548E4D06-D37C-44E8-A45A-FA441876E894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D500901-0890-47DC-AEDF-92E7B832741F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D500901-0890-47DC-AEDF-92E7B832741F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D500901-0890-47DC-AEDF-92E7B832741F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D500901-0890-47DC-AEDF-92E7B832741F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDFB18BF-5441-4D93-B295-17743F7E3D89} = {BA058193-22CB-47A4-8023-ED4369A917AC}

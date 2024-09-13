@@ -11,10 +11,7 @@ builder.Host.UseSerilog((context, sp, logConfig) =>
 });
 
 builder.Services.AddRequestBusForMvc<Program>(builder.Configuration);
-builder.Services.Scan<Program>(new()
-{
-    SkipWhenAutoBindMissing = true
-});
+builder.Services.Scan<Program>(builder.Configuration);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

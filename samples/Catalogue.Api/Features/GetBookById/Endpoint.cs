@@ -1,7 +1,7 @@
 using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Mvc;
+using Bookworm.Catalogue.Api.Contracts;
 using Bookworm.Catalogue.Api.Features.Shared.Endpoints;
-using Catalogue.Api.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookworm.Catalogue.Api.Features.GetBookById;
@@ -19,7 +19,7 @@ public class Endpoint : EndpointBase<DefaultGroup>
             .WithOpenApi();
     }
 
-    private Task<IResult> Handle(IRequestBus bus, [FromRoute] string id, CancellationToken ct)
+    private Task<IResult> Handle(IWebRequestBus bus, [FromRoute] string id, CancellationToken ct)
     {
         return bus.Result<GetBookByIdRequest, GetBookByIdResponse>(new GetBookByIdRequest
         {

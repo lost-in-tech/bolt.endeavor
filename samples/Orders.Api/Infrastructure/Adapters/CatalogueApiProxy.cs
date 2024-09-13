@@ -1,8 +1,8 @@
 using Bolt.Endeavor;
 using Bolt.Endeavor.Extensions.Mvc;
 using Bolt.IocScanner.Attributes;
+using Bookworm.Catalogue.Api.Contracts;
 using Bookworm.Orders.Api.Features.Shared.Ports;
-using Catalogue.Api.Contracts;
 using Microsoft.Extensions.Options;
 
 namespace Bookworm.Orders.Api.Infrastructure.Adapters;

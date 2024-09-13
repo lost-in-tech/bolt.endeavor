@@ -1,4 +1,4 @@
-﻿namespace Catalogue.Api.Contracts;
+﻿namespace Bookworm.Catalogue.Api.Contracts;
 
 public static class GetBookByIdEndpoint
 {

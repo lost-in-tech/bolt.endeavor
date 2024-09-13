@@ -1,5 +1,5 @@
 using Bolt.Endeavor;
-using Catalogue.Api.Contracts;
+using Bookworm.Catalogue.Api.Contracts;
 
 namespace Bookworm.Orders.Api.Features.Shared.Ports;
 

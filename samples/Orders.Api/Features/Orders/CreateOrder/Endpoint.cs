@@ -1,4 +1,3 @@
-using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Mvc;
 using Bookworm.Orders.Api.Features.Shared.Endpoints;
 using Orders.Api.Contracts;
@@ -17,6 +16,6 @@ public class Endpoint : EndpointBase<DefaultGroup>
             .WithOpenApi();
     }
 
-    private Task<IResult> Handle(IRequestBus bus, CreateOrderRequest request, CancellationToken ct)
+    private Task<IResult> Handle(IWebRequestBus bus, CreateOrderRequest request, CancellationToken ct)
         => bus.Result<CreateOrderRequest, CreateOrderResponse>(request, ct);
 }

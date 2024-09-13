@@ -1,7 +1,6 @@
 using Bolt.Endeavor;
 using Bolt.Endeavor.Extensions.Bus;
 using Bookworm.Orders.Api.Features.Shared.Ports;
-using Catalogue.Api.Contracts;
 using Orders.Api.Contracts;
 
 namespace Bookworm.Orders.Api.Features.Orders.CreateOrder;

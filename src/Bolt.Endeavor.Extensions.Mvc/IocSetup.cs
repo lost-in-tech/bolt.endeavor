@@ -34,6 +34,7 @@ public static class IocSetup
         services.AddSingleton<IDataKeySettings>(_ => options);
         services.AddRequestBus();
 
+        services.TryAddTransient<IWebRequestBus,WebRequestBus>();
         services.TryAddSingleton<ITraceIdProvider, TraceIdProvider>();
         services.TryAddSingleton<ICurrentTenantProvider, CurrentTenantProvider>();
         services.TryAddSingleton<ICurrentUserProvider, CurrentUserProvider>();
@@ -56,7 +57,6 @@ public static class IocSetup
 
         services.AddHttpClient();
         services.AddEndpoints(options.AssembliesToScan);
-        services.ScanAndConfigure(configuration, options.AssembliesToScan);
 
         if (options.AutoRegister)
         {
@@ -118,7 +118,7 @@ public static class IocSetup
 
 public record RequestBusMvcOptions : IDataKeySettings
 {
-    public bool AutoRegister { get; init; } = true;
+    public bool AutoRegister { get; init; } = false;
     public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
 

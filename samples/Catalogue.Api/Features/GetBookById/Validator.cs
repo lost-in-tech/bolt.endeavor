@@ -1,9 +1,11 @@
 using Bolt.Endeavor.Extensions.Bus.FluentValidation;
-using Catalogue.Api.Contracts;
+using Bolt.IocScanner.Attributes;
+using Bookworm.Catalogue.Api.Contracts;
 using FluentValidation;
 
 namespace Bookworm.Catalogue.Api.Features.GetBookById;
 
+[AutoBind]
 internal sealed class Validator : FluentRequestValidator<GetBookByIdRequest> 
 {
     public Validator()
