@@ -8,6 +8,7 @@ internal interface IHttpContextWrapper
     string? QueryValue(string name);
     string? RouteValue(string name);
     string? HeaderValue(string name);
+    string? RequestPath();
 }
 
 internal sealed class HttpContextWrapper(IHttpContextAccessor contextAccessor) : IHttpContextWrapper
@@ -28,5 +29,10 @@ internal sealed class HttpContextWrapper(IHttpContextAccessor contextAccessor) :
     {
         if (contextAccessor.HttpContext == null) return null;
         return contextAccessor.HttpContext.Request.Headers.TryGetValue(name, out var value) ? value.ToString() : null;
+    }
+
+    public string? RequestPath()
+    {
+        return contextAccessor.HttpContext?.Request.Path;
     }
 }

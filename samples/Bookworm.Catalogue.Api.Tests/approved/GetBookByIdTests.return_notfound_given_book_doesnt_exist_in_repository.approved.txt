@@ -7,6 +7,7 @@
     "Type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
     "Title": "Book not found with id:bw-100",
     "Status": 404,
+    "Instance": "/api/v1/books/bw-100",
     "TraceId": "fake-trace-id-value"
   }
 }

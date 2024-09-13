@@ -8,7 +8,9 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 
 public static class RequestBusExtensions
 {
-    public static IActionResult ToActionResult<T>(this MaySucceed<T> rsp, string? traceId = null)
+    public static IActionResult ToActionResult<T>(this MaySucceed<T> rsp, 
+        string? traceId = null,
+        string? instance = null)
     {
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
             || rsp.StatusCode == HttpResult.HttpStatusCodeTempRedirect)
@@ -32,6 +34,7 @@ public static class RequestBusExtensions
                 Status = rsp.StatusCode,
                 Title = rsp.Failure.Reason,
                 TraceId = traceId ?? Activity.Current?.TraceId.ToString(),
+                Instance = instance,
                 Errors = rsp.Failure.Errors?.Select(x => new ApiProblemDetailError()
                 {
                     Code = x.Code,
@@ -59,7 +62,9 @@ public static class RequestBusExtensions
         return new StatusCodeResult(rsp.StatusCode);
     }
     
-    public static IActionResult ToActionResult(this MaySucceed rsp, string? traceId = null)
+    public static IActionResult ToActionResult(this MaySucceed rsp, 
+        string? traceId = null, 
+        string? instance = null)
     {
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
             || rsp.StatusCode == HttpResult.HttpStatusCodeTempRedirect)
@@ -83,6 +88,7 @@ public static class RequestBusExtensions
                 Status = rsp.StatusCode,
                 Title = rsp.Failure.Reason,
                 TraceId = traceId ?? Activity.Current?.TraceId.ToString(),
+                Instance = instance,
                 Errors = rsp.Failure.Errors?.Select(x => new ApiProblemDetailError()
                 {
                     Code = x.Code,
@@ -105,13 +111,16 @@ public static class RequestBusExtensions
         return new StatusCodeResult(rsp.StatusCode);
     }
 
-    private static ProblemHttpResult BuildProblemDetailsResult(Failure failure, string? traceId)
+    private static ProblemHttpResult BuildProblemDetailsResult(Failure failure, 
+        string? traceId, 
+        string? instance)
     {
         return TypedResults.Problem(new ProblemDetails
         {
             Extensions =
             {
                 ["traceId"] = traceId ?? Activity.Current?.TraceId.ToString(),
+                ["instance"] = instance,
                 ["errors"] = failure.Errors?.Select(x => new 
                 {
                     Name = x.PropertyName,
@@ -124,7 +133,9 @@ public static class RequestBusExtensions
         });
     }
 
-    public static IResult ToResult(this MaySucceed rsp, string? traceId = null)
+    public static IResult ToResult(this MaySucceed rsp, 
+        string? traceId = null,
+        string? instance = null)
     {
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
             || rsp.StatusCode == HttpResult.HttpStatusCodeTempRedirect)
@@ -142,7 +153,7 @@ public static class RequestBusExtensions
         
         if (rsp.IsFailed)
         {
-            return BuildProblemDetailsResult(rsp.Failure, traceId);
+            return BuildProblemDetailsResult(rsp.Failure, traceId, instance);
         }
 
         if (rsp.StatusCode == HttpResult.HttpStatusCodeCreated)
@@ -157,7 +168,9 @@ public static class RequestBusExtensions
         return TypedResults.StatusCode(rsp.StatusCode);
     }
     
-    public static IResult ToResult<T>(this MaySucceed<T> rsp, string? traceId = null)
+    public static IResult ToResult<T>(this MaySucceed<T> rsp, 
+        string? traceId = null,
+        string? instance = null)
     {
         if (rsp.StatusCode == HttpResult.HttpStatusCodePermRedirect
             || rsp.StatusCode == HttpResult.HttpStatusCodeTempRedirect)
@@ -176,7 +189,7 @@ public static class RequestBusExtensions
         if (rsp.IsFailed)
         {
             
-            return BuildProblemDetailsResult(rsp.Failure, traceId);
+            return BuildProblemDetailsResult(rsp.Failure, traceId, instance);
         }
 
         if (rsp.StatusCode == HttpResult.HttpStatusCodeCreated)

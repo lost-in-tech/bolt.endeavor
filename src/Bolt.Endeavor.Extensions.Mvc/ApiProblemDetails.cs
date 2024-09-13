@@ -6,6 +6,7 @@ public class ApiProblemDetails
     public string? Title { get; init; }
     public int Status { get; init; }
     public string? Details { get; init; }
+    public string? Instance { get; init; }
     public string? TraceId { get; init; }
     public ApiProblemDetailError[]? Errors { get; init; }
 }

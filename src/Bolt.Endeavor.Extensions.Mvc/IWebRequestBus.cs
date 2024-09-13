@@ -12,18 +12,21 @@ public interface IWebRequestBus
     Task<IActionResult> ActionResult<TRequest>(TRequest request, CancellationToken ct);
 }
 
-internal sealed class WebRequestBus(IRequestBus bus, ITraceIdProvider traceIdProvider) : IWebRequestBus
+internal sealed class WebRequestBus(
+    IRequestBus bus, 
+    ITraceIdProvider traceIdProvider,
+    IHttpContextWrapper httpContextWrapper) : IWebRequestBus
 {
     public async Task<IResult> Result<TRequest, TResponse>(TRequest request, CancellationToken ct)
     {
         var rsp = await bus.Send<TRequest, TResponse>(request, ct);
-        return rsp.ToResult(traceIdProvider.Get());
+        return rsp.ToResult(traceIdProvider.Get(), httpContextWrapper.RequestPath());
     }
 
     public async Task<IResult> Result<TRequest>(TRequest request, CancellationToken ct)
     {
         var rsp = await bus.Send(request, ct);
-        return rsp.ToResult(traceIdProvider.Get());
+        return rsp.ToResult(traceIdProvider.Get(), httpContextWrapper.RequestPath());
     }
 
     public async Task<IActionResult> ActionResult<TRequest, TResponse>(TRequest request, CancellationToken ct)

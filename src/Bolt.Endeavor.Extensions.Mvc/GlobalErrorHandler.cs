@@ -36,6 +36,7 @@ internal class GlobalErrorHandler(ILogger<GlobalErrorHandler> logger,
             Title = isDevEnv ? $"{exception.GetType().FullName} : {exception.Message}" : "An unhandled error occured",
             Details = "Check log for details",
             Status = statusCode,
+            Instance = httpContext.Request.Path
         }, cancellationToken);
 
         return true;
