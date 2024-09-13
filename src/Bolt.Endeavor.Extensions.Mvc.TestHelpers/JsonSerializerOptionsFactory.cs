@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers;
 
-internal static class JsonSerializerOptionsFactory
+public static class JsonSerializerOptionsFactory
 {
     private static readonly Lazy<JsonSerializerOptions> Instance = new(() =>
     {
