@@ -117,6 +117,9 @@ public static class RequestBusExtensions
     {
         return TypedResults.Problem(new ProblemDetails
         {
+            Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+            Title = failure.Reason,
+            Status = failure.StatusCode,
             Extensions =
             {
                 ["traceId"] = traceId ?? Activity.Current?.TraceId.ToString(),
@@ -127,9 +130,7 @@ public static class RequestBusExtensions
                     Reason = x.Message,
                     Code = x.Code
                 })
-            },
-            Title = failure.Reason,
-            Status = failure.StatusCode
+            }
         });
     }
 

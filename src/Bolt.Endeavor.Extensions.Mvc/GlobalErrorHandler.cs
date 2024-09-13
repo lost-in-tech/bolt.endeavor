@@ -32,6 +32,7 @@ internal class GlobalErrorHandler(ILogger<GlobalErrorHandler> logger,
         httpContext.Response.Headers[settings.TraceIdHeaderKey] = traceId; 
         await httpContext.Response.WriteAsJsonAsync(new ApiProblemDetails
         {
+            Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1",
             TraceId = traceId,
             Title = isDevEnv ? $"{exception.GetType().FullName} : {exception.Message}" : "An unhandled error occured",
             Details = "Check log for details",
