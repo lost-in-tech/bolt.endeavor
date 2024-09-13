@@ -119,7 +119,7 @@ public static class IocSetup
 public record RequestBusMvcOptions : IDataKeySettings
 {
     public bool AutoRegister { get; init; } = false;
-    public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()];
+    public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
 
     public string TenantRouteName { get; init; } = "tenant";
