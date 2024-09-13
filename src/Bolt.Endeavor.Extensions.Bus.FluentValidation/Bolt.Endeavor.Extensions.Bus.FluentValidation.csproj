@@ -6,7 +6,7 @@
         <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
         <Authors>Mohammad Ruhul Amin</Authors>
-        <RepositoryUrl>https://github.com/lost-in-tech/bolt.maysucceed</RepositoryUrl>
+        <RepositoryUrl>https://github.com/lost-in-tech/bolt.endeavor</RepositoryUrl>
         <PackageTags>MaySucceed,RequestBus,CQS,CQRS</PackageTags>
         <PackageId>Bolt.Endeavor.Extensions.Bus.FluentValidation</PackageId>
         <Description>FluentValidation integration with Request bus validation system</Description>
