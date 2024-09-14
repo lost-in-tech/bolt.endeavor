@@ -1,8 +1,11 @@
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -30,6 +33,19 @@ public static class IocSetup
         RequestBusMvcOptions? options = null)
     {
         options ??= new RequestBusMvcOptions();
+
+        if (!options.SkipConfigureDefaultJsonOptions)
+        {
+            services.Configure<JsonOptions>(opt =>
+            {
+                opt.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.SerializerOptions.PropertyNameCaseInsensitive = true;
+                opt.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                opt.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                
+                options.ConfigureJsonOptions?.Invoke(opt);
+            });
+        }
 
         services.AddSingleton<IDataKeySettings>(_ => options);
         services.AddRequestBus();
@@ -126,4 +142,18 @@ public record RequestBusMvcOptions : IDataKeySettings
     public string TenantQueryName { get; init; } = "tenant";
     
     public TracingIocSetupOptions? TracingOptions { get; init; }
+    /// <summary>
+    /// When set to false the following json serializer settings applied. Set the value to true
+    /// If the want to configure json by yourself
+    /// - Ignore null when writing null
+    /// - Case insensitive
+    /// - CamelCasePropertyName
+    /// - String for enum
+    /// </summary>
+    public bool SkipConfigureDefaultJsonOptions { get; init; }
+    
+    /// <summary>
+    /// If you want to apply default json option but want to amend on top of that.
+    /// </summary>
+    public Action<JsonOptions>? ConfigureJsonOptions { get; init; }
 }

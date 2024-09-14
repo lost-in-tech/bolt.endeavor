@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Bolt.Endeavor.Extensions.Bus;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -28,20 +28,12 @@ public static class RequestBusExtensions
         
         if (rsp.IsFailed)
         {
-            return new ObjectResult(new ApiProblemDetails()
-            {
-                Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1",
-                Status = rsp.StatusCode,
-                Title = rsp.Failure.Reason,
-                TraceId = traceId ?? Activity.Current?.TraceId.ToString(),
-                Instance = instance,
-                Errors = rsp.Failure.Errors?.Select(x => new ApiProblemDetailError()
-                {
-                    Code = x.Code,
-                    Reason = x.Message,
-                    Name = x.PropertyName
-                }).ToArray()
-            })
+            var problemDetails = ProblemDetailsFactory.New(
+                rsp.Failure, 
+                traceId ?? Activity.Current?.TraceId.ToString(), 
+                instance);
+            
+            return new ObjectResult(problemDetails)
             {
                 StatusCode = rsp.StatusCode
             };
@@ -82,20 +74,11 @@ public static class RequestBusExtensions
         
         if (rsp.IsFailed)
         {
-            return new ObjectResult(new ApiProblemDetails
-            {
-                Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1",
-                Status = rsp.StatusCode,
-                Title = rsp.Failure.Reason,
-                TraceId = traceId ?? Activity.Current?.TraceId.ToString(),
-                Instance = instance,
-                Errors = rsp.Failure.Errors?.Select(x => new ApiProblemDetailError()
-                {
-                    Code = x.Code,
-                    Reason = x.Message,
-                    Name = x.PropertyName
-                }).ToArray()
-            })
+            var problemDetails = ProblemDetailsFactory.New(
+                rsp.Failure, 
+                traceId ?? Activity.Current?.TraceId.ToString());
+            
+            return new ObjectResult(problemDetails)
             {
                 StatusCode = rsp.StatusCode
             };
@@ -109,29 +92,6 @@ public static class RequestBusExtensions
         }
 
         return new StatusCodeResult(rsp.StatusCode);
-    }
-
-    private static ProblemHttpResult BuildProblemDetailsResult(Failure failure, 
-        string? traceId, 
-        string? instance)
-    {
-        return TypedResults.Problem(new ProblemDetails
-        {
-            Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1",
-            Title = failure.Reason,
-            Status = failure.StatusCode,
-            Extensions =
-            {
-                ["traceId"] = traceId ?? Activity.Current?.TraceId.ToString(),
-                ["instance"] = instance,
-                ["errors"] = failure.Errors?.Select(x => new 
-                {
-                    Name = x.PropertyName,
-                    Reason = x.Message,
-                    Code = x.Code
-                })
-            }
-        });
     }
 
     public static IResult ToResult(this MaySucceed rsp, 
@@ -154,7 +114,7 @@ public static class RequestBusExtensions
         
         if (rsp.IsFailed)
         {
-            return BuildProblemDetailsResult(rsp.Failure, traceId, instance);
+            return BuildProblemDetailsResult(ProblemDetailsFactory.New(rsp.Failure, traceId, instance));
         }
 
         if (rsp.StatusCode == HttpResult.HttpStatusCodeCreated)
@@ -189,8 +149,7 @@ public static class RequestBusExtensions
         
         if (rsp.IsFailed)
         {
-            
-            return BuildProblemDetailsResult(rsp.Failure, traceId, instance);
+            return BuildProblemDetailsResult(ProblemDetailsFactory.New(rsp.Failure, traceId, instance));
         }
 
         if (rsp.StatusCode == HttpResult.HttpStatusCodeCreated)
@@ -203,5 +162,20 @@ public static class RequestBusExtensions
         if(rsp.StatusCode == HttpResult.HttpStatusCodeOk) return TypedResults.Ok(rsp.Value);
 
         return TypedResults.StatusCode(rsp.StatusCode);
+    }
+
+    private static IResult BuildProblemDetailsResult(ApiProblemDetails problem)
+    {
+        return TypedResults.Problem(new ProblemDetails
+        {
+            Status = problem.Status,
+            Extensions = new Dictionary<string, object?>
+            {
+                ["details"] = problem.Details,
+                ["traceId"] = problem.TraceId,
+                ["instance"] = problem.Instance,
+                ["errors"] = problem.Errors
+            }
+        });
     }
 }
