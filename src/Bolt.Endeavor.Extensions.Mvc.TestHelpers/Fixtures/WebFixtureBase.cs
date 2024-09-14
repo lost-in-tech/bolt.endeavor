@@ -1,24 +1,31 @@
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using NSubstitute;
-using NSubstitute.ClearExtensions;
+using Microsoft.Extensions.FileProviders;
+using Xunit;
 
 namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers.Fixtures;
 
-public class WebFixture<TEntry> : WebApplicationFactory<TEntry> where TEntry : class
+public abstract class WebFixtureBase<TEntry> :  
+    WebApplicationFactory<TEntry> where TEntry : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.ConfigureAppConfiguration((context, config) =>
+        {
+            var root = Directory.GetCurrentDirectory();
+            var fileProvider = new PhysicalFileProvider(root);
+            config.AddJsonFile(fileProvider, "TestSettings.json", true, false);
+            
+            ConfigureAppConfiguration(context, config);
+        });
+        
         builder.ConfigureTestServices(services =>
         {
-            services.Replace(ServiceDescriptor.Singleton<ITraceIdProvider,FakeTraceIdProvider>());
+            services.Replace<ITraceIdProvider, FakeTraceIdProvider>(asSingleton: true);
             ConfigureTestServices(services);
         });
         
@@ -31,28 +38,18 @@ public class WebFixture<TEntry> : WebApplicationFactory<TEntry> where TEntry : c
     {
     }
 
+    protected virtual void ConfigureAppConfiguration(
+        WebHostBuilderContext context, 
+        IConfigurationBuilder builder)
+    {
+    }
+
     public T GetRequiredService<T>() where T : notnull => this.Services.GetRequiredService<T>();
-    public T? TryGetServiceOf<T,TImpl>()
-    {
-        return Services.GetServices<T>().FirstOrDefault(x => x?.GetType() == typeof(TImpl));
-    }
-    
-    public T GetFakeService<T>() where T : class
-    {
-        var result = this.Services.GetRequiredService<T>();
-        result.ClearSubstitute();
-        result.ClearReceivedCalls();
+    public T? TryGetServiceOf<T, TImpl>() => Services.TryGetServiceOf<T,TImpl>();
 
-        return result;
-    }
+    public T GetFakeService<T>() where T : class => Services.GetFakeService<T>();
 
-    public T? TryGetFakeServiceOf<T,TImpl>() where T : class
-    {
-        var result = Services.GetServices<T>().FirstOrDefault(x => x?.GetType() == typeof(TImpl));
-        result.ClearSubstitute();
-        result.ClearReceivedCalls();
-        return result;
-    }
+    public T? TryGetFakeServiceOf<T, TImpl>() where T : class => Services.TryGetFakeServiceOf<T, TImpl>();
 
     public Task<HttpApiResponse<TContent>> HttpGet<TContent>(string url, Dictionary<string, string>? headers = null)
     {

@@ -1,21 +1,19 @@
-using System.Net;
 using Bolt.Endeavor.Extensions.Mvc.TestHelpers;
 using Bookworm.Catalogue.Api.Contracts;
 using Bookworm.Catalogue.Api.Features.Shared.Ports;
 using Bookworm.Catalogue.Api.Tests.Fakes;
 using NSubstitute;
-using Shouldly;
 
 namespace Bookworm.Catalogue.Api.Tests;
 
-public class GetBookByIdTests(WebFixture fixture) 
-    : IClassFixture<WebFixture>
+[Collection(nameof(WebFixtureCollection))]
+public class GetBookByIdTests(WebFixture fixture)
 {
     [Fact]
     public async Task return_book_given_book_exists_in_repository()
     {
         // Arrange
-        var fakeRepo = fixture.GetRequiredService<IBooksRepository>();
+        var fakeRepo = fixture.GetFakeService<IBooksRepository>();
 
         var givenBookRecord = new BookRecord
         {
