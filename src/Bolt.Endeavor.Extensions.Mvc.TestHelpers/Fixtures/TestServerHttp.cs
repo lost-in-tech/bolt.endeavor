@@ -40,9 +40,9 @@ internal static class TestServerHttp
 
             return new HttpApiResponse<TContent>
             {
-                Content = cnt,
                 StatusCode = rsp.StatusCode,
-                Headers = msg.Headers.ToDictionary(x => x.Key, v => v.Value.ToString() ?? string.Empty)
+                Headers = Map(rsp.Headers),
+                Content = cnt,
             };
         }
 

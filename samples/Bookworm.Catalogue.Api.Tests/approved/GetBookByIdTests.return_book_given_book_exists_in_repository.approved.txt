@@ -1,0 +1,11 @@
+﻿{
+  "content": {
+    "id": "bw-100",
+    "title": "title-1",
+    "price": 12
+  },
+  "statusCode": "OK",
+  "headers": {
+    "x-trace-id": "fake-trace-id-value"
+  }
+}

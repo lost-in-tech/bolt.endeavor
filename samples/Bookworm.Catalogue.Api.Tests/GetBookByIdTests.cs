@@ -37,9 +37,7 @@ public class GetBookByIdTests(WebFixture fixture)
             );
 
         // Assert
-        gotRsp.StatusCode.ShouldBe(HttpStatusCode.OK);
-        gotRsp.Content.ShouldNotBeNull();
-        gotRsp.Content.Id.ShouldBe(givenBookRecord.Id);
+        gotRsp.ShouldMatchContent();
     }
     
     [Fact]
