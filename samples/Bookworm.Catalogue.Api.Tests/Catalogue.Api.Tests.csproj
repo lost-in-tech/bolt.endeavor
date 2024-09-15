@@ -28,12 +28,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\Bolt.Endeavor.Extensions.Mvc.TestHelpers\Bolt.Endeavor.Extensions.Mvc.TestHelpers.csproj" />
       <ProjectReference Include="..\Catalogue.Api\Catalogue.Api.csproj" />
     </ItemGroup>
-
+    <ItemGroup>
+        <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest"/>
+    </ItemGroup>
 </Project>

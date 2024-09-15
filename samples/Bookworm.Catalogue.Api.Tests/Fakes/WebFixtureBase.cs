@@ -14,7 +14,7 @@ public sealed class WebFixture : WebFixtureBase<Program>
     }
 }
 
-[CollectionDefinition(nameof(WebFixtureCollection))]
+[CollectionDefinition(nameof(WebFixtureCollection), DisableParallelization = true)]
 public class WebFixtureCollection : ICollectionFixture<WebFixture>
 {
 }

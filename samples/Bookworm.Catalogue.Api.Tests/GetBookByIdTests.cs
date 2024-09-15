@@ -2,7 +2,6 @@ using Bolt.Endeavor.Extensions.Mvc.TestHelpers;
 using Bookworm.Catalogue.Api.Contracts;
 using Bookworm.Catalogue.Api.Features.Shared.Ports;
 using Bookworm.Catalogue.Api.Tests.Fakes;
-using NSubstitute;
 
 namespace Bookworm.Catalogue.Api.Tests;
 
