@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Xunit;
 
 namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers.Fixtures;
 
