@@ -1,4 +1,5 @@
 using System.Net;
+using Bolt.Endeavor.Extensions.App;
 
 namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers.Fixtures;
 

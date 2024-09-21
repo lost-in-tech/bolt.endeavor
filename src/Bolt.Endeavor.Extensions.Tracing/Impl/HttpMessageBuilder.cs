@@ -18,10 +18,12 @@ internal sealed class HttpMessageBuilder(IServiceProvider sp) : IHttpMessageHand
     }
 }
 
-internal sealed class TracingHttpMessageHandler(IEnumerable<IHttpTracingHeadersProvider> providers) : DelegatingHandler
+internal sealed class TracingHttpMessageHandler(IServiceProvider sp) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
+        var providers = sp.GetServices<IHttpTracingHeadersProvider>();
+        
         foreach (var provider in providers)
         {
             var headers = provider.Get();

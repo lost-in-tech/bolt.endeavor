@@ -1,3 +1,4 @@
+using Bolt.Endeavor.Extensions.App;
 using Bolt.Endeavor.Extensions.Mvc;
 using Bookworm.Orders.Api.Features.Shared.Endpoints;
 using Orders.Api.Contracts;

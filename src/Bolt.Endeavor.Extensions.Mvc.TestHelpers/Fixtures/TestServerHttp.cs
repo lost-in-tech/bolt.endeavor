@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using Bolt.Endeavor.Extensions.App;
 
 namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers.Fixtures;
 

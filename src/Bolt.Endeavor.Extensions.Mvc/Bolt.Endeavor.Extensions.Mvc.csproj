@@ -12,6 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Bolt.Endeavor.Extensions.App\Bolt.Endeavor.Extensions.App.csproj" />
         <ProjectReference Include="..\Bolt.Endeavor.Extensions.Bus\Bolt.Endeavor.Extensions.Bus.csproj"/>
         <ProjectReference Include="..\Bolt.Endeavor.Extensions.Tracing\Bolt.Endeavor.Extensions.Tracing.csproj" />
         <ProjectReference Include="..\Bolt.Endeavor\Bolt.Endeavor.csproj"/>

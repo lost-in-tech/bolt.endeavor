@@ -1,3 +1,4 @@
+using Bolt.Endeavor.Extensions.App;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Hosting;
 
@@ -9,6 +10,7 @@ internal sealed class TraceContextProvider(
     ICurrentUserProvider currentUserProvider,
     ICurrentTenantProvider tenantProvider,
     IWebHostEnvironment hostEnvironment,
+    IAppNameProvider appNameProvider,
     ITracingKeySettings settings) : ITraceContextProvider
 {
     public TraceContextDto Get()
@@ -18,7 +20,7 @@ internal sealed class TraceContextProvider(
             TraceId = traceIdProvider.Get(),
             UserId = currentUserProvider.Get().UserId,
             Tenant = tenantProvider.Get(),
-            AppId = hostEnvironment.ApplicationName,
+            AppId = appNameProvider.Get(),
             ConsumerId = http.HeaderValue(settings.AppIdHeaderKey)
         };
     }

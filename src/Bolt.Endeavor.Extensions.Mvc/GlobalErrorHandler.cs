@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Bolt.Endeavor.Extensions.App;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;

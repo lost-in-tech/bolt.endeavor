@@ -1,4 +1,4 @@
-namespace Bolt.Endeavor.Extensions.Mvc;
+namespace Bolt.Endeavor.Extensions.App;
 
 public record ApiProblemDetails
 {
@@ -14,11 +14,11 @@ public record ApiProblemDetails
 public record ApiProblemDetailError
 {
     public string? Code { get; init; }
-    public required string Reason { get; init; }
+    public string Reason { get; init; } = string.Empty;
     public string? Name { get; init; }
 }
 
-internal sealed class ProblemDetailsFactory
+public sealed class ProblemDetailsFactory
 {
     public static ApiProblemDetails New(Failure failure, 
         string? traceId = null,

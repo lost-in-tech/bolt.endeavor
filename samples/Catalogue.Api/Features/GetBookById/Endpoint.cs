@@ -1,3 +1,4 @@
+using Bolt.Endeavor.Extensions.App;
 using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Mvc;
 using Bookworm.Catalogue.Api.Contracts;

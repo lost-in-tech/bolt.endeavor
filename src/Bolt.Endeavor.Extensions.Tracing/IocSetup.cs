@@ -7,7 +7,8 @@ namespace Bolt.Endeavor.Extensions.Tracing;
 
 public static class IocSetup
 {
-    public static IServiceCollection AddTracingFeatures(this IServiceCollection services, TracingIocSetupOptions? options = null)
+    public static IServiceCollection AddTracingFeatures(this IServiceCollection services, 
+        TracingIocSetupOptions? options = null)
     {
         options ??= new TracingIocSetupOptions();
         

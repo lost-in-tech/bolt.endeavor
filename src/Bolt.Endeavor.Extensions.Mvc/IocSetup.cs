@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Bolt.Endeavor.Extensions.App;
 using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,11 @@ public static class IocSetup
     {
         options ??= new RequestBusMvcOptions();
 
+        services.AddBoltEndeavorApp(configuration, new BoltEndeavorAppOptions
+        {
+            AppName = options.AppName
+        });
+        
         if (!options.SkipConfigureDefaultJsonOptions)
         {
             services.Configure<JsonOptions>(opt =>
@@ -134,6 +140,7 @@ public static class IocSetup
 
 public record RequestBusMvcOptions : IDataKeySettings
 {
+    public string? AppName { get; init; }
     public bool AutoRegister { get; init; } = false;
     public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
