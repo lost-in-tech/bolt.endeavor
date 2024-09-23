@@ -26,15 +26,15 @@ public abstract class IocFixtureBase
     
     protected abstract void ConfigureServices(IServiceCollection collection, IConfiguration configuration);
 
-    protected IServiceScope CreateScope() => _sp.Value.CreateScope();
+    public IServiceScope CreateScope() => _sp.Value.CreateScope();
 
-    protected async Task WithScope(Func<IServiceProvider,Task> action)
+    public async Task WithScope(Func<IServiceProvider,Task> action)
     {
         using var scope = CreateScope();
         await action.Invoke(scope.ServiceProvider);
     }
     
-    protected void WithScope(Action<IServiceProvider> action)
+    public void WithScope(Action<IServiceProvider> action)
     {
         using var scope = CreateScope();
         action.Invoke(scope.ServiceProvider);
