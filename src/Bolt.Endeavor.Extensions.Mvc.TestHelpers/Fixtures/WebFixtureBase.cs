@@ -85,4 +85,14 @@ public abstract class WebFixtureBase<TEntry> :
     {
         return TestServerHttp.HttpPut<TInput,TContent>(CreateClient(), url, input, headers);
     }
+    
+    public Task<HttpApiResponse> HttpPost<TInput>(string url, TInput input, Dictionary<string, string>? headers = null)
+    {
+        return TestServerHttp.HttpPost(CreateClient(), url, input, headers);
+    }
+    
+    public Task<HttpApiResponse> HttpPut<TInput>(string url, TInput input, Dictionary<string, string>? headers = null)
+    {
+        return TestServerHttp.HttpPut(CreateClient(), url, input, headers);
+    }
 }
