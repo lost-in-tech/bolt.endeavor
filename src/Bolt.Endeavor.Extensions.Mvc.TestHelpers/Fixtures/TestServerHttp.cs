@@ -8,7 +8,63 @@ namespace Bolt.Endeavor.Extensions.Mvc.TestHelpers.Fixtures;
 
 internal static class TestServerHttp
 {
-    private static async Task<HttpApiResponse<TContent>> HttpSend<TInput,TContent>(HttpClient client, HttpMethod method, string url, TInput input,
+    public static Task<HttpApiResponse<TContent>> HttpGet<TContent>(HttpClient client, string url,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<None, TContent>(client, HttpMethod.Get, url, new None(), headers ?? new());
+    }
+
+    public static Task<HttpApiResponse<TContent>> HttpDelete<TContent>(HttpClient client, string url,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<None, TContent>(client, HttpMethod.Delete, url, new None(), headers ?? new());
+    }
+
+    public static Task<HttpApiResponse> HttpDelete(HttpClient client, string url,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend(client, HttpMethod.Delete, url, new None(), headers ?? new());
+    }
+
+    public static Task<HttpApiResponse<TContent>> HttpPost<TContent>(HttpClient client, string url,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<None, TContent>(client, HttpMethod.Post, url, new None(), headers ?? new());
+    }
+
+    public static Task<HttpApiResponse<TContent>> HttpPost<TInput, TContent>(HttpClient client, string url,
+        TInput input, Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<TInput, TContent>(client, HttpMethod.Post, url, input, headers ?? new());
+    }
+
+    public static Task<HttpApiResponse> HttpPost<TInput>(HttpClient client, string url,
+        TInput input, Dictionary<string, string>? headers = null)
+    {
+        return HttpSend(client, HttpMethod.Post, url, input, headers ?? new());
+    }
+
+    public static Task<HttpApiResponse<TContent>> HttpPut<TContent>(HttpClient client, string url,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<None, TContent>(client, HttpMethod.Put, url, new None(), headers ?? new());
+    }
+
+    public static Task<HttpApiResponse<TContent>> HttpPut<TInput, TContent>(HttpClient client, string url, TInput input,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend<TInput, TContent>(client, HttpMethod.Put, url, input, headers ?? new());
+    }
+
+    public static Task<HttpApiResponse> HttpPut<TInput>(HttpClient client, string url, TInput input,
+        Dictionary<string, string>? headers = null)
+    {
+        return HttpSend(client, HttpMethod.Put, url, input, headers ?? new());
+    }
+
+
+    private static async Task<HttpApiResponse<TContent>> HttpSend<TInput, TContent>(HttpClient client,
+        HttpMethod method, string url, TInput input,
         Dictionary<string, string> headers)
     {
         using var msg = new HttpRequestMessage(method, url);
@@ -24,9 +80,9 @@ internal static class TestServerHttp
                 Encoding.UTF8,
                 "application/json");
         }
-        
+
         using var rsp = await client.SendAsync(msg);
-        
+
         if (rsp.IsSuccessStatusCode)
         {
             TContent? cnt;
@@ -57,7 +113,7 @@ internal static class TestServerHttp
         {
             throw new Exception($"Failed to deserialize response as ProblemDetails with {e.Message}", e);
         }
-        
+
         return new HttpApiResponse<TContent>
         {
             Content = default,
@@ -66,8 +122,9 @@ internal static class TestServerHttp
             ProblemDetails = problemDetails
         };
     }
-    
-    private static async Task<HttpApiResponse> HttpSend<TInput>(HttpClient client, HttpMethod method, string url, TInput input,
+
+    private static async Task<HttpApiResponse> HttpSend<TInput>(HttpClient client, HttpMethod method, string url,
+        TInput input,
         Dictionary<string, string> headers)
     {
         using var msg = new HttpRequestMessage(method, url);
@@ -85,9 +142,9 @@ internal static class TestServerHttp
         }
 
         msg.Method = method;
-        
+
         using var rsp = await client.SendAsync(msg);
-        
+
         if (rsp.IsSuccessStatusCode)
         {
             return new HttpApiResponse
@@ -96,7 +153,7 @@ internal static class TestServerHttp
                 Headers = msg.Headers.ToDictionary(x => x.Key, v => v.Value.ToString() ?? string.Empty)
             };
         }
-        
+
         ApiProblemDetails? problemDetails;
         try
         {
@@ -115,43 +172,6 @@ internal static class TestServerHttp
         };
     }
 
-    public static Task<HttpApiResponse<TContent>> HttpGet<TContent>(HttpClient client, string url, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<None, TContent>(client, HttpMethod.Get, url, new None(), headers ?? new());
-    }
-    
-    public static Task<HttpApiResponse<TContent>> HttpDelete<TContent>(HttpClient client, string url, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<None, TContent>(client, HttpMethod.Delete, url, new None(), headers ?? new());
-    }
-    
-    public static Task<HttpApiResponse> HttpDelete(HttpClient client, string url, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend(client, HttpMethod.Delete, url, new None(), headers ?? new());
-    }
-    
-    public static Task<HttpApiResponse<TContent>> HttpPost<TContent>(HttpClient client, string url, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<None, TContent>(client, HttpMethod.Post, url, new None(), headers ?? new());
-    }
-    
-    public static Task<HttpApiResponse<TContent>> HttpPut<TContent>(HttpClient client, string url, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<None, TContent>(client, HttpMethod.Put, url, new None(), headers ?? new());
-    }
-    
-    
-    public static Task<HttpApiResponse<TContent>> HttpPost<TInput,TContent>(HttpClient client, string url, TInput input, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<TInput, TContent>(client, HttpMethod.Post, url, input, headers ?? new());
-    }
-    
-    public static Task<HttpApiResponse<TContent>> HttpPut<TInput,TContent>(HttpClient client, string url, TInput input, Dictionary<string, string>? headers = null)
-    {
-        return HttpSend<TInput, TContent>(client, HttpMethod.Put, url, input, headers ?? new());
-    }
-    
-     
 
     private static Dictionary<string, string> Map(HttpResponseHeaders rspHeader)
     {
