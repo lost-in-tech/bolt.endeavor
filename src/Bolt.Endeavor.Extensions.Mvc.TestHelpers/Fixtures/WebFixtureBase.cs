@@ -50,49 +50,58 @@ public abstract class WebFixtureBase<TEntry> :
 
     public T? TryGetFakeServiceOf<T, TImpl>() where T : class => Services.TryGetFakeServiceOf<T, TImpl>();
 
+
+    protected virtual HttpClient CreateHttpClient()
+    {
+        return CreateClient(new WebApplicationFactoryClientOptions
+        {
+            AllowAutoRedirect = false
+        });
+    }
+    
     public Task<HttpApiResponse<TContent>> HttpGet<TContent>(string url, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpGet<TContent>(CreateClient(), url, headers);
+        return TestServerHttp.HttpGet<TContent>(CreateHttpClient(), url, headers);
     }
     
     public Task<HttpApiResponse<TContent>> HttpDelete<TContent>(string url, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpDelete<TContent>(CreateClient(), url, headers);
+        return TestServerHttp.HttpDelete<TContent>(CreateHttpClient(), url, headers);
     }
     
     public Task<HttpApiResponse> HttpDelete(string url, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpDelete(CreateClient(), url, headers);
+        return TestServerHttp.HttpDelete(CreateHttpClient(), url, headers);
     }
     
     public Task<HttpApiResponse<TContent>> HttpPost<TContent>(string url, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPost<TContent>(CreateClient(), url, headers);
+        return TestServerHttp.HttpPost<TContent>(CreateHttpClient(), url, headers);
     }
     
     public Task<HttpApiResponse<TContent>> HttpPut<TContent>(string url, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPut<TContent>(CreateClient(), url, headers);
+        return TestServerHttp.HttpPut<TContent>(CreateHttpClient(), url, headers);
     }
     
     
     public Task<HttpApiResponse<TContent>> HttpPost<TInput,TContent>(string url, TInput input, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPost<TInput,TContent>(CreateClient(), url, input, headers);
+        return TestServerHttp.HttpPost<TInput,TContent>(CreateHttpClient(), url, input, headers);
     }
     
     public Task<HttpApiResponse<TContent>> HttpPut<TInput,TContent>(string url, TInput input, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPut<TInput,TContent>(CreateClient(), url, input, headers);
+        return TestServerHttp.HttpPut<TInput,TContent>(CreateHttpClient(), url, input, headers);
     }
     
     public Task<HttpApiResponse> HttpPost<TInput>(string url, TInput input, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPost(CreateClient(), url, input, headers);
+        return TestServerHttp.HttpPost(CreateHttpClient(), url, input, headers);
     }
     
     public Task<HttpApiResponse> HttpPut<TInput>(string url, TInput input, Dictionary<string, string>? headers = null)
     {
-        return TestServerHttp.HttpPut(CreateClient(), url, input, headers);
+        return TestServerHttp.HttpPut(CreateHttpClient(), url, input, headers);
     }
 }

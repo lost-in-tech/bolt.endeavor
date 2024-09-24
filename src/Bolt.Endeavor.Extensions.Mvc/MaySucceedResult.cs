@@ -18,12 +18,11 @@ internal sealed class MaySucceedResult(MaySucceed value) : ActionResult, IResult
         {
             httpContext.Response.StatusCode = value.StatusCode;
 
-            var resourceUrl = value.RedirectUrl();
+            var resourceUrl = value.StatusCode == 201 
+                ? value.ResourceUrl()
+                : value.RedirectUrl();
 
-            if (!string.IsNullOrWhiteSpace(resourceUrl))
-            {
-                httpContext.Response.Headers.Location = resourceUrl;
-            }
+            AppendLocationHelper.AppendLocation(httpContext, resourceUrl);
             
             return;
         }
@@ -49,15 +48,14 @@ internal sealed class MaySucceedResult<T>(MaySucceed<T> value) : ActionResult, I
     {
         if (value.IsSucceed)
         {
+            var resourceUrl = value.StatusCode == 201 
+                ? value.ResourceUrl()
+                : value.RedirectUrl();
+            
+            AppendLocationHelper.AppendLocation(httpContext, resourceUrl);
+            
             httpContext.Response.StatusCode = value.StatusCode;
 
-            var resourceUrl = value.RedirectUrl();
-
-            if (!string.IsNullOrWhiteSpace(resourceUrl))
-            {
-                httpContext.Response.Headers.Location = resourceUrl;
-            }
-            
             await httpContext.Response.WriteAsJsonAsync(value.Value, CancellationToken.None);
             
             return;
@@ -70,5 +68,36 @@ internal sealed class MaySucceedResult<T>(MaySucceed<T> value) : ActionResult, I
             httpContext.Request.Path);
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, CancellationToken.None);
+    }
+
+    
+}
+
+internal static class AppendLocationHelper
+{
+    public static void AppendLocation(HttpContext httpContext, string? location)
+    {
+        // Check if resourceUrl is null
+        if (!string.IsNullOrWhiteSpace(location))
+        {
+            // Check if the resourceUrl is relative and needs to be converted to an absolute URL
+            if (!Uri.IsWellFormedUriString(location, UriKind.Absolute))
+            {
+                // Get the request's base URL
+                var request = httpContext.Request;
+                var baseUri = $"{request.Scheme}://{request.Host}{request.PathBase}";
+
+                // Combine the baseUri with the relative resourceUrl
+                var absoluteUri = new Uri(new Uri(baseUri), location);
+            
+                // Set the Location header
+                httpContext.Response.Headers.Location = absoluteUri.ToString();
+            }
+            else
+            {
+                // If the URL is already absolute, just set it
+                httpContext.Response.Headers.Location = location;
+            }
+        }
     }
 }

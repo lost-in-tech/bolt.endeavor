@@ -6,7 +6,7 @@ public static class HttpResult
 {
     public const int HttpStatusCodeOk = 200;
     public const int HttpStatusCodeNoContent = 204;
-    public const int HttpStatusCodeCreated = 301;
+    public const int HttpStatusCodeCreated = 201;
     public const int HttpStatusCodeAccepted = 202;
     
     
