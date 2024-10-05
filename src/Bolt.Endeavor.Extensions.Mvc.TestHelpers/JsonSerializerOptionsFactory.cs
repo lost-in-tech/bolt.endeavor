@@ -9,6 +9,7 @@ public static class JsonSerializerOptionsFactory
     {
         var opt = new JsonSerializerOptions();
         opt.Converters.Add(new JsonStringEnumConverter());
+        opt.Converters.Add(new JsonTypeConverter());
         opt.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         opt.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         opt.WriteIndented = true;
