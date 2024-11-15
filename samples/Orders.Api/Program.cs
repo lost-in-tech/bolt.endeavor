@@ -11,7 +11,7 @@ builder.Host.UseSerilog((context, sp, logConfig) =>
         .Enrich.WithProperty("env", builder.Environment.EnvironmentName.ToLowerInvariant());
 });
 
-builder.Services.AddRequestBusForMvc(builder.Configuration);
+builder.Services.AddMaySucceedForMvc(builder.Configuration);
 builder.Services.Scan<Program>(builder.Configuration);
 
 // Add services to the container.

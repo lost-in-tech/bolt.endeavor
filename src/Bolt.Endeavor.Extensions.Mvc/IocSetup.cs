@@ -14,7 +14,7 @@ namespace Bolt.Endeavor.Extensions.Mvc;
 
 public static class IocSetup
 {
-    public static IServiceCollection AddRequestBusForMvc<T>(this IServiceCollection services,
+    public static IServiceCollection AddMaySucceedForMvc<T>(this IServiceCollection services,
         IConfiguration configuration,
         RequestBusMvcOptions? options = null)
     {
@@ -25,10 +25,10 @@ public static class IocSetup
             AssembliesToScan = options.AssembliesToScan.Append(typeof(T).Assembly).ToArray()
         };
         
-        return AddRequestBusForMvc(services, configuration, options);
+        return AddMaySucceedForMvc(services, configuration, options);
     }
 
-    public static IServiceCollection AddRequestBusForMvc(this IServiceCollection services,
+    public static IServiceCollection AddMaySucceedForMvc(this IServiceCollection services,
         IConfiguration configuration,
         RequestBusMvcOptions? options = null)
     {

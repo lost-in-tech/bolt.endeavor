@@ -1,3 +1,4 @@
+using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Mvc;
 using Bolt.IocScanner;
 using Serilog;
@@ -10,7 +11,8 @@ builder.Host.UseSerilog((context, sp, logConfig) =>
     logConfig.ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services.AddRequestBusForMvc<Program>(builder.Configuration);
+builder.Services.AddMaySucceedForMvc<Program>(builder.Configuration);
+builder.Services.AddRequestBus();
 builder.Services.Scan<Program>(builder.Configuration);
 
 // Add services to the container.

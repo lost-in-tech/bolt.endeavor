@@ -6,8 +6,7 @@ using Orders.Api.Contracts;
 namespace Bookworm.Orders.Api.Features.Orders.CreateOrder;
 
 internal sealed class Handler(
-    ICatalogueApiProxy catalogueApiProxy, 
-    ILogger<Handler> logger) 
+    ICatalogueApiProxy catalogueApiProxy) 
     : RequestHandlerAsync<CreateOrderRequest, CreateOrderResponse>
 {
     public override async Task<MaySucceed<CreateOrderResponse>> Handle(
