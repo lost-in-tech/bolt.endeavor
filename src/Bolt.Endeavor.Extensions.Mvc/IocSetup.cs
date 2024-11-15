@@ -2,7 +2,6 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Bolt.Endeavor.Extensions.App;
-using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -54,9 +53,7 @@ public static class IocSetup
         }
 
         services.AddSingleton<IDataKeySettings>(_ => options);
-        services.AddRequestBus();
 
-        services.TryAddTransient<IWebRequestBus,WebRequestBus>();
         services.TryAddSingleton<ITraceIdProvider, TraceIdProvider>();
         services.TryAddSingleton<ICurrentTenantProvider, CurrentTenantProvider>();
         services.TryAddSingleton<ICurrentUserProvider, CurrentUserProvider>();
@@ -79,21 +76,6 @@ public static class IocSetup
 
         services.AddHttpClient();
         services.AddEndpoints(options.AssembliesToScan);
-
-        if (options.AutoRegister)
-        {
-            foreach (var assembly in options.AssembliesToScan)
-            {
-                AddServices(
-                    services,
-                    assembly,
-                    [
-                        typeof(IRequestValidator<>),
-                        typeof(IRequestHandler<,>),
-                        typeof(IProcessFilter<,>)
-                    ]);
-            }
-        }
 
         return services;
     }
@@ -141,7 +123,6 @@ public static class IocSetup
 public record RequestBusMvcOptions : IDataKeySettings
 {
     public string? AppName { get; init; }
-    public bool AutoRegister { get; init; } = false;
     public Assembly[] AssembliesToScan { get; init; } = [Assembly.GetExecutingAssembly()];
     public bool UseDefaultGlobalErrorHandler { get; init; } = true;
 

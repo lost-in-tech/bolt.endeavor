@@ -20,11 +20,11 @@ public class Endpoint : EndpointBase<DefaultGroup>
             .WithOpenApi();
     }
 
-    private Task<IResult> Handle(IWebRequestBus bus, [FromRoute] string id, CancellationToken ct)
+    private Task<IResult> Handle(IRequestBus bus, [FromRoute] string id, CancellationToken ct)
     {
-        return bus.Result<GetBookByIdRequest, GetBookByIdResponse>(new GetBookByIdRequest
+        return bus.Send<GetBookByIdRequest, GetBookByIdResponse>(new GetBookByIdRequest
         {
             BookId = id
-        }, ct);
+        }, ct).ToResult();
     }
 }

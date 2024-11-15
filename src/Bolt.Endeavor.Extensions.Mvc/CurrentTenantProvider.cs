@@ -1,4 +1,3 @@
-using Bolt.Endeavor.Extensions.Bus;
 using Bolt.Endeavor.Extensions.Tracing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
