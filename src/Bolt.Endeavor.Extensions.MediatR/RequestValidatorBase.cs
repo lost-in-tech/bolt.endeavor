@@ -7,15 +7,16 @@ public abstract class RequestValidatorBase<TRequest>
     : AbstractValidator<TRequest>, IPipelineBehavior<TRequest, MaySucceed> 
     where TRequest : IRequest<MaySucceed>
 {
-    public Task<MaySucceed> Handle(TRequest request, RequestHandlerDelegate<MaySucceed> next, CancellationToken cancellationToken)
+    public virtual Task<MaySucceed> Handle(TRequest request, RequestHandlerDelegate<MaySucceed> next, CancellationToken cancellationToken)
     {
-        var validationResult = Validate(request);
+        var validationResult = ValidationResultHelper.ToMaySucceed(Validate(request));
 
-        if (validationResult.IsValid) return next();
+        if (validationResult.IsFailed)
+        {
+            return Task.FromResult<MaySucceed>(validationResult.Failure);
+        }
 
-        var errors = validationResult.Errors.Select(x => new Error(x.ErrorMessage, x.PropertyName, x.ErrorCode)).ToArray();
-
-        return Task.FromResult<MaySucceed>(HttpResult.BadRequest(errors));
+        return next();
     }
 }
 
@@ -25,12 +26,13 @@ public abstract class RequestValidatorBase<TRequest,TResponse>
 {
     public Task<MaySucceed<TResponse>> Handle(TRequest request, RequestHandlerDelegate<MaySucceed<TResponse>> next, CancellationToken cancellationToken)
     {
-        var validationResult = Validate(request);
+        var validationResult = ValidationResultHelper.ToMaySucceed(Validate(request));
 
-        if (validationResult.IsValid) return next();
-
-        var errors = validationResult.Errors.Select(x => new Error(x.ErrorMessage, x.PropertyName, x.ErrorCode)).ToArray();
-
-        return Task.FromResult<MaySucceed<TResponse>>(HttpResult.BadRequest(errors));
+        if (validationResult.IsFailed)
+        {
+            return Task.FromResult<MaySucceed<TResponse>>(validationResult.Failure);
+        }
+        
+        return next();
     }
 }
